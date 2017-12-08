@@ -2,13 +2,13 @@
 #define __STATE_HPP__
 
 namespace Beta{
-    class State{
+    class HoughState{
         public:
-            State(){
+            HoughState(){
 
             }
 
-            ~State(){
+            ~HoughState(){
 
             }
 
@@ -26,6 +26,18 @@ namespace Beta{
 
     };
 
+    class RegressionState{
+        public:
+            RegressionState(){
+
+            }
+            ~RegressionState(){
+
+            }
+        
+
+
+    }
 
 
 

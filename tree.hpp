@@ -180,6 +180,11 @@ class Tree{
 
 
 
+        void train(){
+            
+        }
+
+
         const size_t size(){return nodes_.size();}
         const unsigned long counter(){return counter_;}
         const int L(){return L_;}
