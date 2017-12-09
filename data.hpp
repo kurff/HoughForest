@@ -22,7 +22,7 @@ class Image{
         int index_;
         float key_;
         int label_;
-        vector<Point> keypoints_; 
+        vector<Point2f> keypoints_; 
 
 };
 

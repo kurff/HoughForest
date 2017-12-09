@@ -14,10 +14,8 @@ class RegressionEvaluation{
         float calculate(IIterator begin, IIterator middle, IIterator end){
             float xm = 0;
             float ym = 0;
-
-
             for(IIterator it = begin; it != middle; ++ it){
-                
+                xm += it->keypoints_[0].x;
             }
 
         }
@@ -37,7 +35,7 @@ class ClassificationEvaluation{
             float xm = 0;
             float ym = 0;
 
-            
+
             for(IIterator it = begin; it != middle; ++ it){
                 
             }
