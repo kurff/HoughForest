@@ -5,11 +5,14 @@
 #include <map>
 #include <string>
 #include <queue>
-
+#include <algorithm>
 
 
 
 #include "glog/logging.h"
+#include "feature.hpp"
+#include "selector.hpp"
+#include "data.hpp"
 
 #include <mutex>
 
@@ -79,8 +82,14 @@ class Node{
 template<typename State>
 class Tree{
     typedef typename map<unsigned long, Node<State>* >::iterator Iterator;
+    typedef typename vector<Image>::iterator IIterator;
     public:
-        Tree(int L):L_(L), counter_(0){
+        Tree(const Config& config):counter_(0){
+            L_ = config.configuration_.max_depth();
+            feature_ = new Feature(config);
+            int context_patch = config.configuration_.context_patch();
+            selector_ = new Selector(- context_patch, context_patch);
+            dim_features_ = config.configuration_.dim_features();
 
         }
         ~Tree(){
@@ -178,9 +187,26 @@ class Tree{
 
         }
 
-
-
         void train(){
+
+        }
+
+
+        void train_recurse(IIterator begin, IIterator end){
+            selector_->random_generation(dim_features_);
+            
+            for(int i = 0; i < dim_features_; ++ i){
+                for(IIterator it = begin; it != end; ++ it){
+                    it->key_ = feature_->extract(it->img_, selector_->selector(i));
+                }
+                sort(begin,end, compare);
+                for(IIterator it  = begin, it != end; ++ it){
+
+
+                }
+
+            }
+
             
         }
 
@@ -197,6 +223,13 @@ class Tree{
         std::map<unsigned long, Node<State>* > nodes_;
         queue<Node<State>* > leafs_;
         unsigned long counter_;
+        Feature<State>* feature_;
+        Selector<State>* selector_;
+        int dim_features_;
+        
+
+
+
         int L_;
 
 };

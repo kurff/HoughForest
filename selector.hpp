@@ -39,6 +39,9 @@ class Selector{
             }
         }
 
+        const State & selector(int index){
+            return selector_[index];
+        }
     protected:
         vector<State> selector_;
         int min_val_;

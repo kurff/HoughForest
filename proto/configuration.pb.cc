@@ -34,11 +34,15 @@ void protobuf_AssignDesc_configuration_2eproto() {
       "configuration.proto");
   GOOGLE_CHECK(file != NULL);
   ConfigurationProto_descriptor_ = file->message_type(0);
-  static const int ConfigurationProto_offsets_[4] = {
+  static const int ConfigurationProto_offsets_[8] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, max_depth_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, num_trees_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, mode_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, min_entropy_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, height_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, width_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, context_patch_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, dim_features_),
   };
   ConfigurationProto_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -81,10 +85,12 @@ void protobuf_AddDesc_configuration_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023configuration.proto\022\004Beta\"l\n\022Configura"
-    "tionProto\022\024\n\tmax_depth\030\001 \002(\005:\0015\022\024\n\tnum_t"
-    "rees\030\002 \002(\005:\0013\022\017\n\004mode\030\003 \002(\005:\0012\022\031\n\013min_en"
-    "tropy\030\004 \002(\002:\0040.01", 137);
+    "\n\023configuration.proto\022\004Beta\"\313\001\n\022Configur"
+    "ationProto\022\024\n\tmax_depth\030\001 \002(\005:\0015\022\024\n\tnum_"
+    "trees\030\002 \002(\005:\0013\022\017\n\004mode\030\003 \002(\005:\0012\022\031\n\013min_e"
+    "ntropy\030\004 \002(\002:\0040.01\022\023\n\006height\030\005 \002(\005:\003100\022"
+    "\022\n\005width\030\006 \002(\005:\003100\022\031\n\rcontext_patch\030\007 \002"
+    "(\005:\00250\022\031\n\014dim_features\030\010 \002(\005:\003100", 233);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "configuration.proto", &protobuf_RegisterTypes);
   ConfigurationProto::default_instance_ = new ConfigurationProto();
@@ -106,6 +112,10 @@ const int ConfigurationProto::kMaxDepthFieldNumber;
 const int ConfigurationProto::kNumTreesFieldNumber;
 const int ConfigurationProto::kModeFieldNumber;
 const int ConfigurationProto::kMinEntropyFieldNumber;
+const int ConfigurationProto::kHeightFieldNumber;
+const int ConfigurationProto::kWidthFieldNumber;
+const int ConfigurationProto::kContextPatchFieldNumber;
+const int ConfigurationProto::kDimFeaturesFieldNumber;
 #endif  // !_MSC_VER
 
 ConfigurationProto::ConfigurationProto()
@@ -130,6 +140,10 @@ void ConfigurationProto::SharedCtor() {
   num_trees_ = 3;
   mode_ = 2;
   min_entropy_ = 0.01f;
+  height_ = 100;
+  width_ = 100;
+  context_patch_ = 50;
+  dim_features_ = 100;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -165,11 +179,15 @@ ConfigurationProto* ConfigurationProto::New() const {
 }
 
 void ConfigurationProto::Clear() {
-  if (_has_bits_[0 / 32] & 15) {
+  if (_has_bits_[0 / 32] & 255) {
     max_depth_ = 5;
     num_trees_ = 3;
     mode_ = 2;
     min_entropy_ = 0.01f;
+    height_ = 100;
+    width_ = 100;
+    context_patch_ = 50;
+    dim_features_ = 100;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -240,6 +258,66 @@ bool ConfigurationProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(40)) goto parse_height;
+        break;
+      }
+
+      // required int32 height = 5 [default = 100];
+      case 5: {
+        if (tag == 40) {
+         parse_height:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &height_)));
+          set_has_height();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(48)) goto parse_width;
+        break;
+      }
+
+      // required int32 width = 6 [default = 100];
+      case 6: {
+        if (tag == 48) {
+         parse_width:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &width_)));
+          set_has_width();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(56)) goto parse_context_patch;
+        break;
+      }
+
+      // required int32 context_patch = 7 [default = 50];
+      case 7: {
+        if (tag == 56) {
+         parse_context_patch:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &context_patch_)));
+          set_has_context_patch();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(64)) goto parse_dim_features;
+        break;
+      }
+
+      // required int32 dim_features = 8 [default = 100];
+      case 8: {
+        if (tag == 64) {
+         parse_dim_features:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &dim_features_)));
+          set_has_dim_features();
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -289,6 +367,26 @@ void ConfigurationProto::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->min_entropy(), output);
   }
 
+  // required int32 height = 5 [default = 100];
+  if (has_height()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->height(), output);
+  }
+
+  // required int32 width = 6 [default = 100];
+  if (has_width()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->width(), output);
+  }
+
+  // required int32 context_patch = 7 [default = 50];
+  if (has_context_patch()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->context_patch(), output);
+  }
+
+  // required int32 dim_features = 8 [default = 100];
+  if (has_dim_features()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->dim_features(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -317,6 +415,26 @@ void ConfigurationProto::SerializeWithCachedSizes(
   // required float min_entropy = 4 [default = 0.01];
   if (has_min_entropy()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->min_entropy(), target);
+  }
+
+  // required int32 height = 5 [default = 100];
+  if (has_height()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->height(), target);
+  }
+
+  // required int32 width = 6 [default = 100];
+  if (has_width()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->width(), target);
+  }
+
+  // required int32 context_patch = 7 [default = 50];
+  if (has_context_patch()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->context_patch(), target);
+  }
+
+  // required int32 dim_features = 8 [default = 100];
+  if (has_dim_features()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->dim_features(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -355,6 +473,34 @@ int ConfigurationProto::ByteSize() const {
     // required float min_entropy = 4 [default = 0.01];
     if (has_min_entropy()) {
       total_size += 1 + 4;
+    }
+
+    // required int32 height = 5 [default = 100];
+    if (has_height()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->height());
+    }
+
+    // required int32 width = 6 [default = 100];
+    if (has_width()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->width());
+    }
+
+    // required int32 context_patch = 7 [default = 50];
+    if (has_context_patch()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->context_patch());
+    }
+
+    // required int32 dim_features = 8 [default = 100];
+    if (has_dim_features()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->dim_features());
     }
 
   }
@@ -396,6 +542,18 @@ void ConfigurationProto::MergeFrom(const ConfigurationProto& from) {
     if (from.has_min_entropy()) {
       set_min_entropy(from.min_entropy());
     }
+    if (from.has_height()) {
+      set_height(from.height());
+    }
+    if (from.has_width()) {
+      set_width(from.width());
+    }
+    if (from.has_context_patch()) {
+      set_context_patch(from.context_patch());
+    }
+    if (from.has_dim_features()) {
+      set_dim_features(from.dim_features());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -413,7 +571,7 @@ void ConfigurationProto::CopyFrom(const ConfigurationProto& from) {
 }
 
 bool ConfigurationProto::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+  if ((_has_bits_[0] & 0x000000ff) != 0x000000ff) return false;
 
   return true;
 }
@@ -424,6 +582,10 @@ void ConfigurationProto::Swap(ConfigurationProto* other) {
     std::swap(num_trees_, other->num_trees_);
     std::swap(mode_, other->mode_);
     std::swap(min_entropy_, other->min_entropy_);
+    std::swap(height_, other->height_);
+    std::swap(width_, other->width_);
+    std::swap(context_patch_, other->context_patch_);
+    std::swap(dim_features_, other->dim_features_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

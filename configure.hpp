@@ -19,11 +19,13 @@ using google::protobuf::io::FileInputStream;
 using namespace std;
 
 namespace Beta{
-    class Configure{
+    class Config{
 
         public:
 
             ConfigurationProto configuration_;
+
+
 
             void read_from_text(string file){
                 int fd = open(file.c_str(), O_RDONLY);
@@ -40,6 +42,8 @@ namespace Beta{
 
 
     };
+
+
 
 
 

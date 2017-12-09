@@ -118,6 +118,34 @@ class ConfigurationProto : public ::google::protobuf::Message {
   inline float min_entropy() const;
   inline void set_min_entropy(float value);
 
+  // required int32 height = 5 [default = 100];
+  inline bool has_height() const;
+  inline void clear_height();
+  static const int kHeightFieldNumber = 5;
+  inline ::google::protobuf::int32 height() const;
+  inline void set_height(::google::protobuf::int32 value);
+
+  // required int32 width = 6 [default = 100];
+  inline bool has_width() const;
+  inline void clear_width();
+  static const int kWidthFieldNumber = 6;
+  inline ::google::protobuf::int32 width() const;
+  inline void set_width(::google::protobuf::int32 value);
+
+  // required int32 context_patch = 7 [default = 50];
+  inline bool has_context_patch() const;
+  inline void clear_context_patch();
+  static const int kContextPatchFieldNumber = 7;
+  inline ::google::protobuf::int32 context_patch() const;
+  inline void set_context_patch(::google::protobuf::int32 value);
+
+  // required int32 dim_features = 8 [default = 100];
+  inline bool has_dim_features() const;
+  inline void clear_dim_features();
+  static const int kDimFeaturesFieldNumber = 8;
+  inline ::google::protobuf::int32 dim_features() const;
+  inline void set_dim_features(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:Beta.ConfigurationProto)
  private:
   inline void set_has_max_depth();
@@ -128,6 +156,14 @@ class ConfigurationProto : public ::google::protobuf::Message {
   inline void clear_has_mode();
   inline void set_has_min_entropy();
   inline void clear_has_min_entropy();
+  inline void set_has_height();
+  inline void clear_has_height();
+  inline void set_has_width();
+  inline void clear_has_width();
+  inline void set_has_context_patch();
+  inline void clear_has_context_patch();
+  inline void set_has_dim_features();
+  inline void clear_has_dim_features();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -137,6 +173,10 @@ class ConfigurationProto : public ::google::protobuf::Message {
   ::google::protobuf::int32 num_trees_;
   ::google::protobuf::int32 mode_;
   float min_entropy_;
+  ::google::protobuf::int32 height_;
+  ::google::protobuf::int32 width_;
+  ::google::protobuf::int32 context_patch_;
+  ::google::protobuf::int32 dim_features_;
   friend void  protobuf_AddDesc_configuration_2eproto();
   friend void protobuf_AssignDesc_configuration_2eproto();
   friend void protobuf_ShutdownFile_configuration_2eproto();
@@ -245,6 +285,102 @@ inline void ConfigurationProto::set_min_entropy(float value) {
   set_has_min_entropy();
   min_entropy_ = value;
   // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.min_entropy)
+}
+
+// required int32 height = 5 [default = 100];
+inline bool ConfigurationProto::has_height() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void ConfigurationProto::set_has_height() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void ConfigurationProto::clear_has_height() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void ConfigurationProto::clear_height() {
+  height_ = 100;
+  clear_has_height();
+}
+inline ::google::protobuf::int32 ConfigurationProto::height() const {
+  // @@protoc_insertion_point(field_get:Beta.ConfigurationProto.height)
+  return height_;
+}
+inline void ConfigurationProto::set_height(::google::protobuf::int32 value) {
+  set_has_height();
+  height_ = value;
+  // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.height)
+}
+
+// required int32 width = 6 [default = 100];
+inline bool ConfigurationProto::has_width() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void ConfigurationProto::set_has_width() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void ConfigurationProto::clear_has_width() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void ConfigurationProto::clear_width() {
+  width_ = 100;
+  clear_has_width();
+}
+inline ::google::protobuf::int32 ConfigurationProto::width() const {
+  // @@protoc_insertion_point(field_get:Beta.ConfigurationProto.width)
+  return width_;
+}
+inline void ConfigurationProto::set_width(::google::protobuf::int32 value) {
+  set_has_width();
+  width_ = value;
+  // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.width)
+}
+
+// required int32 context_patch = 7 [default = 50];
+inline bool ConfigurationProto::has_context_patch() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void ConfigurationProto::set_has_context_patch() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void ConfigurationProto::clear_has_context_patch() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void ConfigurationProto::clear_context_patch() {
+  context_patch_ = 50;
+  clear_has_context_patch();
+}
+inline ::google::protobuf::int32 ConfigurationProto::context_patch() const {
+  // @@protoc_insertion_point(field_get:Beta.ConfigurationProto.context_patch)
+  return context_patch_;
+}
+inline void ConfigurationProto::set_context_patch(::google::protobuf::int32 value) {
+  set_has_context_patch();
+  context_patch_ = value;
+  // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.context_patch)
+}
+
+// required int32 dim_features = 8 [default = 100];
+inline bool ConfigurationProto::has_dim_features() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void ConfigurationProto::set_has_dim_features() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void ConfigurationProto::clear_has_dim_features() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void ConfigurationProto::clear_dim_features() {
+  dim_features_ = 100;
+  clear_has_dim_features();
+}
+inline ::google::protobuf::int32 ConfigurationProto::dim_features() const {
+  // @@protoc_insertion_point(field_get:Beta.ConfigurationProto.dim_features)
+  return dim_features_;
+}
+inline void ConfigurationProto::set_dim_features(::google::protobuf::int32 value) {
+  set_has_dim_features();
+  dim_features_ = value;
+  // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.dim_features)
 }
 
 
