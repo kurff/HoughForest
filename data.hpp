@@ -21,6 +21,7 @@ class Image{
         Mat img_;
         int index_;
         float key_;
+        int label_;
         vector<Point> keypoints_; 
 
 };

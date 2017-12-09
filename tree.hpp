@@ -79,7 +79,7 @@ class Node{
 };
 
 
-template<typename State>
+template<typename State, typename Evaluation>
 class Tree{
     typedef typename map<unsigned long, Node<State>* >::iterator Iterator;
     typedef typename vector<Image>::iterator IIterator;
@@ -194,7 +194,9 @@ class Tree{
 
         void train_recurse(IIterator begin, IIterator end){
             selector_->random_generation(dim_features_);
-            
+            Random random_generator;
+
+
             for(int i = 0; i < dim_features_; ++ i){
                 for(IIterator it = begin; it != end; ++ it){
                     it->key_ = feature_->extract(it->img_, selector_->selector(i));
