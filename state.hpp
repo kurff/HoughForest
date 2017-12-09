@@ -2,13 +2,13 @@
 #define __STATE_HPP__
 
 namespace Beta{
-    class HoughState{
+    class State{
         public:
-            HoughState(){
+            State():x0_(0), y0_(0),x1_(0), y1_(0), t_(0.0f),xc_(0),yc_(0){
 
             }
 
-            ~HoughState(){
+            ~State(){
 
             }
 
@@ -18,6 +18,9 @@ namespace Beta{
             int x1_;
             int y1_;
             float t_; // threshold
+
+            int xc_;
+            int yc_;
 
 
 
@@ -37,7 +40,7 @@ namespace Beta{
         
 
 
-    }
+    };
 
 
 

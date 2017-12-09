@@ -11,8 +11,7 @@ class Image{
         ~Image(){}
         Mat img_;
         int index_;
-
-
+        vector<Point> keypoints_; 
 
 };
 

@@ -11,4 +11,12 @@ enable_testing()
 add_executable(test_data  test_data.cpp)
 target_link_libraries(test_data gtest gtest_main glog opencv_highgui opencv_core opencv_imgproc)
 add_test(NAME test_data COMMAND test_data)
+
+add_executable(test_selector  test_selector.cpp)
+target_link_libraries(test_selector gtest gtest_main glog opencv_highgui opencv_core opencv_imgproc)
+add_test(NAME test_selector COMMAND random_generation)
+
+add_executable(test_configure  test_configure.cpp ../proto/configuration.pb.cc)
+target_link_libraries(test_configure gtest gtest_main glog protobuf opencv_highgui opencv_core opencv_imgproc)
+add_test(NAME test_configure COMMAND readtxt)
 endif()

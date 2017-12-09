@@ -1,0 +1,12 @@
+syntax = "proto2";
+
+package Beta;
+
+//message 
+
+message ConfigurationProto{
+   required int32 max_depth = 1 [default = 5]; // the maximum of depth
+   required int32 num_trees = 2 [default = 3]; // the number of trees;
+   required int32 mode = 3 [default = 2]; // train, test or detection
+   required float min_entropy = 4[default = 0.01]; // the mimimum of entropy used to split node
+}

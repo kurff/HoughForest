@@ -68,9 +68,9 @@ class ImageAnotation{
         const string file_name(){return file_name_;}
         const vector<Box> text_boxes(){return text_boxes_;}
 
-        vector< vector<KeyPoint*> > & strain_keypoints(){return train_keypoints_;}
+        vector< vector<Point*> > & strain_keypoints(){return train_keypoints_;}
 
-        const vector< vector<KeyPoint*> > train_keypoints(){return train_keypoints_;}
+        const vector< vector<Point*> > train_keypoints(){return train_keypoints_;}
 
     protected:
         vector<vector<Box> > boxes_;
@@ -78,8 +78,8 @@ class ImageAnotation{
         //vector<string> text_ground_truth_;
         vector<vector<string> > ground_truth_name_;
         string file_name_;
-        vector< vector<KeyPoint*> > train_keypoints_;
-        vector< vector<KeyPoint*> > test_keypoints_;
+        vector< vector<Point*> > train_keypoints_;
+        vector< vector<Point*> > test_keypoints_;
 
 
 };
@@ -96,12 +96,12 @@ class Anotation{
 
         }
 
-        vector<KeyPoint> & skeypoints(){return keypoints_;}
+        vector<Point> & skeypoints(){return keypoints_;}
 
-        const vector<KeyPoint> keypoints(){return keypoints_;}
+        const vector<Point> keypoints(){return keypoints_;}
 
     protected:
-        vector<KeyPoint> keypoints_;
+        vector<Point> keypoints_;
 
 
 };
