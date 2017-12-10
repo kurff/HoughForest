@@ -146,6 +146,20 @@ class ConfigurationProto : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 dim_features() const;
   inline void set_dim_features(::google::protobuf::int32 value);
 
+  // required int32 num_keypoints = 9 [default = 10];
+  inline bool has_num_keypoints() const;
+  inline void clear_num_keypoints();
+  static const int kNumKeypointsFieldNumber = 9;
+  inline ::google::protobuf::int32 num_keypoints() const;
+  inline void set_num_keypoints(::google::protobuf::int32 value);
+
+  // required int32 num_classes = 10 [default = 2];
+  inline bool has_num_classes() const;
+  inline void clear_num_classes();
+  static const int kNumClassesFieldNumber = 10;
+  inline ::google::protobuf::int32 num_classes() const;
+  inline void set_num_classes(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:Beta.ConfigurationProto)
  private:
   inline void set_has_max_depth();
@@ -164,6 +178,10 @@ class ConfigurationProto : public ::google::protobuf::Message {
   inline void clear_has_context_patch();
   inline void set_has_dim_features();
   inline void clear_has_dim_features();
+  inline void set_has_num_keypoints();
+  inline void clear_has_num_keypoints();
+  inline void set_has_num_classes();
+  inline void clear_has_num_classes();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -177,6 +195,8 @@ class ConfigurationProto : public ::google::protobuf::Message {
   ::google::protobuf::int32 width_;
   ::google::protobuf::int32 context_patch_;
   ::google::protobuf::int32 dim_features_;
+  ::google::protobuf::int32 num_keypoints_;
+  ::google::protobuf::int32 num_classes_;
   friend void  protobuf_AddDesc_configuration_2eproto();
   friend void protobuf_AssignDesc_configuration_2eproto();
   friend void protobuf_ShutdownFile_configuration_2eproto();
@@ -381,6 +401,54 @@ inline void ConfigurationProto::set_dim_features(::google::protobuf::int32 value
   set_has_dim_features();
   dim_features_ = value;
   // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.dim_features)
+}
+
+// required int32 num_keypoints = 9 [default = 10];
+inline bool ConfigurationProto::has_num_keypoints() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void ConfigurationProto::set_has_num_keypoints() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void ConfigurationProto::clear_has_num_keypoints() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void ConfigurationProto::clear_num_keypoints() {
+  num_keypoints_ = 10;
+  clear_has_num_keypoints();
+}
+inline ::google::protobuf::int32 ConfigurationProto::num_keypoints() const {
+  // @@protoc_insertion_point(field_get:Beta.ConfigurationProto.num_keypoints)
+  return num_keypoints_;
+}
+inline void ConfigurationProto::set_num_keypoints(::google::protobuf::int32 value) {
+  set_has_num_keypoints();
+  num_keypoints_ = value;
+  // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.num_keypoints)
+}
+
+// required int32 num_classes = 10 [default = 2];
+inline bool ConfigurationProto::has_num_classes() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void ConfigurationProto::set_has_num_classes() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void ConfigurationProto::clear_has_num_classes() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void ConfigurationProto::clear_num_classes() {
+  num_classes_ = 2;
+  clear_has_num_classes();
+}
+inline ::google::protobuf::int32 ConfigurationProto::num_classes() const {
+  // @@protoc_insertion_point(field_get:Beta.ConfigurationProto.num_classes)
+  return num_classes_;
+}
+inline void ConfigurationProto::set_num_classes(::google::protobuf::int32 value) {
+  set_has_num_classes();
+  num_classes_ = value;
+  // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.num_classes)
 }
 
 

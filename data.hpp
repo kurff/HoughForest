@@ -20,9 +20,10 @@ class Image{
         ~Image(){}
         Mat img_;
         int index_;
-        float key_;
+        float key_; // feature
         int label_;
-        vector<Point2f> keypoints_; 
+        vector<Point2f> keypoints_;
+        vector<Point2f> initkeypoints_;
 
 };
 

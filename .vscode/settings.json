@@ -36,6 +36,7 @@
         "typeinfo": "cpp",
         "utility": "cpp",
         "codecvt": "cpp",
-        "*.ipp": "cpp"
+        "*.ipp": "cpp",
+        "algorithm": "cpp"
     }
 }

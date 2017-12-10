@@ -11,6 +11,7 @@
 
 #include "glog/logging.h"
 #include "feature.hpp"
+#include "evaluation.hpp"
 #include "selector.hpp"
 #include "data.hpp"
 
@@ -79,17 +80,21 @@ class Node{
 };
 
 
-template<typename State, typename Evaluation>
+template<typename State>
 class Tree{
     typedef typename map<unsigned long, Node<State>* >::iterator Iterator;
     typedef typename vector<Image>::iterator IIterator;
     public:
         Tree(const Config& config):counter_(0){
             L_ = config.configuration_.max_depth();
-            feature_ = new Feature(config);
+            feature_ = shared_ptr<Feature<State>  > (new Feature(config));
             int context_patch = config.configuration_.context_patch();
-            selector_ = new Selector(- context_patch, context_patch);
+            selector_ = shared_ptr<Selector<State> >(new Selector(- context_patch, context_patch));
             dim_features_ = config.configuration_.dim_features();
+
+            reg_eval_ = shared_ptr<Evaluation> (new RegressionEvaluation(config));
+            cls_eval_ = shared_ptr<Evaluation> (new ClassificationEvaluation(config));
+
 
         }
         ~Tree(){
@@ -192,9 +197,10 @@ class Tree{
         }
 
 
-        void train_recurse(IIterator begin, IIterator end){
+        void train_recurse(IIterator& begin, IIterator& end){
             selector_->random_generation(dim_features_);
             Random random_generator;
+
 
 
             for(int i = 0; i < dim_features_; ++ i){
@@ -202,7 +208,11 @@ class Tree{
                     it->key_ = feature_->extract(it->img_, selector_->selector(i));
                 }
                 sort(begin,end, compare);
+
+                eval_ = random_generation.NextDouble() > 0.5 ? reg_val_ : cls_eval_;
+              
                 for(IIterator it  = begin, it != end; ++ it){
+                    eval_->calculate(begin, it, end);
 
 
                 }
@@ -225,9 +235,16 @@ class Tree{
         std::map<unsigned long, Node<State>* > nodes_;
         queue<Node<State>* > leafs_;
         unsigned long counter_;
-        Feature<State>* feature_;
-        Selector<State>* selector_;
+        shared_ptr <Feature<State> >  feature_;
+        shared_ptr <Selector<State> > selector_;
         int dim_features_;
+
+        shared_ptr<Evaluation> reg_eval_;
+        shared_ptr<Evaluation> cls_eval_;
+
+        shared_ptr<Evaluation> eval_;
+
+
         
 
 
