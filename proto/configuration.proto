@@ -16,3 +16,22 @@ message ConfigurationProto{
    required int32 num_keypoints =9 [default=10];
    required int32 num_classes = 10 [default=2];
 }
+
+message StateProto{
+    required int32 x0 = 1[default = 0];
+    required int32 y0 = 2[default = 0];
+    required int32 x1 = 3[default = 0];
+    required int32 y1 = 4[default = 0];
+    required float t =  5[default = 0];
+    required int32 xc = 6[default = 0];
+    required int32 yc = 6[default = 0];
+}
+
+message NodeProto{
+    required StateProto state = 1;
+    required int32 depth = 2 [default = 0];
+    required uint64 index = 3 [default = 1];
+    
+
+
+}
