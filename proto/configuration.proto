@@ -24,13 +24,30 @@ message StateProto{
     required int32 y1 = 4[default = 0];
     required float t =  5[default = 0];
     required int32 xc = 6[default = 0];
-    required int32 yc = 6[default = 0];
+    required int32 yc = 7[default = 0];
+
+}
+
+
+message PointProto{
+    required float x = 1;
+    required float y = 2;
+}
+message StatisticProto{
+    repeated float cls_statistic = 1 ;
+    repeated PointProto reg_statistic = 2;
+
 }
 
 message NodeProto{
     required StateProto state = 1;
     required int32 depth = 2 [default = 0];
     required uint64 index = 3 [default = 1];
+    repeated int32 child = 4;
+}
+
+message TreeProto{
+    repeated NodeProto nodes =1;
     
 
 

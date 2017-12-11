@@ -14,6 +14,7 @@
 #include "evaluation.hpp"
 #include "selector.hpp"
 #include "data.hpp"
+#include "statistic.hpp"
 
 #include <mutex>
 
@@ -51,6 +52,7 @@ class Node{
         bool & sflag(){return flag_;}
         State & sstate(){return state_;}
         int& sdepth(){return depth_;}
+        int& stype(){return type_;}
         
         const float N(){return N_;}
         const float W(){return W_;}
@@ -62,6 +64,7 @@ class Node{
         const map<unsigned long, Node<State> * > child(){return child_;}
         const Node<State>* parent(){return parent_;}
         const bool flag(){return flag_;}
+        const int& type(){return type_;}
 
     
 
@@ -77,7 +80,10 @@ class Node{
         float Q_;
         float P_;
         float U_;
-        bool flag_; // if flag == TRUE, keep else remove
+        bool flag_; // if flag_ = 1, is leaf node;
+        int type_; // type = 1, regression node; type = 2, classification node; type=-1
+        
+        Statistic* statistic_;
         //static int index;
 };
 
@@ -275,6 +281,9 @@ class Tree{
 
 
 
+
+
+
     protected:
         std::map<unsigned long, Node<State>* > nodes_;
         queue<Node<State>* > leafs_;
@@ -285,7 +294,6 @@ class Tree{
 
         shared_ptr<Evaluation> reg_eval_;
         shared_ptr<Evaluation> cls_eval_;
-
         shared_ptr<Evaluation> eval_;
 
 

@@ -152,7 +152,7 @@ class ClassificationEvaluation: public Evaluation{
         
 
 
-}
+};
 
 
 
