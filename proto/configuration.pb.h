@@ -34,6 +34,11 @@ void protobuf_AssignDesc_configuration_2eproto();
 void protobuf_ShutdownFile_configuration_2eproto();
 
 class ConfigurationProto;
+class StateProto;
+class PointProto;
+class StatisticProto;
+class NodeProto;
+class TreeProto;
 
 // ===================================================================
 
@@ -203,6 +208,525 @@ class ConfigurationProto : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static ConfigurationProto* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class StateProto : public ::google::protobuf::Message {
+ public:
+  StateProto();
+  virtual ~StateProto();
+
+  StateProto(const StateProto& from);
+
+  inline StateProto& operator=(const StateProto& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const StateProto& default_instance();
+
+  void Swap(StateProto* other);
+
+  // implements Message ----------------------------------------------
+
+  StateProto* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const StateProto& from);
+  void MergeFrom(const StateProto& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 x0 = 1 [default = 0];
+  inline bool has_x0() const;
+  inline void clear_x0();
+  static const int kX0FieldNumber = 1;
+  inline ::google::protobuf::int32 x0() const;
+  inline void set_x0(::google::protobuf::int32 value);
+
+  // required int32 y0 = 2 [default = 0];
+  inline bool has_y0() const;
+  inline void clear_y0();
+  static const int kY0FieldNumber = 2;
+  inline ::google::protobuf::int32 y0() const;
+  inline void set_y0(::google::protobuf::int32 value);
+
+  // required int32 x1 = 3 [default = 0];
+  inline bool has_x1() const;
+  inline void clear_x1();
+  static const int kX1FieldNumber = 3;
+  inline ::google::protobuf::int32 x1() const;
+  inline void set_x1(::google::protobuf::int32 value);
+
+  // required int32 y1 = 4 [default = 0];
+  inline bool has_y1() const;
+  inline void clear_y1();
+  static const int kY1FieldNumber = 4;
+  inline ::google::protobuf::int32 y1() const;
+  inline void set_y1(::google::protobuf::int32 value);
+
+  // required float t = 5 [default = 0];
+  inline bool has_t() const;
+  inline void clear_t();
+  static const int kTFieldNumber = 5;
+  inline float t() const;
+  inline void set_t(float value);
+
+  // required int32 xc = 6 [default = 0];
+  inline bool has_xc() const;
+  inline void clear_xc();
+  static const int kXcFieldNumber = 6;
+  inline ::google::protobuf::int32 xc() const;
+  inline void set_xc(::google::protobuf::int32 value);
+
+  // required int32 yc = 7 [default = 0];
+  inline bool has_yc() const;
+  inline void clear_yc();
+  static const int kYcFieldNumber = 7;
+  inline ::google::protobuf::int32 yc() const;
+  inline void set_yc(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:Beta.StateProto)
+ private:
+  inline void set_has_x0();
+  inline void clear_has_x0();
+  inline void set_has_y0();
+  inline void clear_has_y0();
+  inline void set_has_x1();
+  inline void clear_has_x1();
+  inline void set_has_y1();
+  inline void clear_has_y1();
+  inline void set_has_t();
+  inline void clear_has_t();
+  inline void set_has_xc();
+  inline void clear_has_xc();
+  inline void set_has_yc();
+  inline void clear_has_yc();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::int32 x0_;
+  ::google::protobuf::int32 y0_;
+  ::google::protobuf::int32 x1_;
+  ::google::protobuf::int32 y1_;
+  float t_;
+  ::google::protobuf::int32 xc_;
+  ::google::protobuf::int32 yc_;
+  friend void  protobuf_AddDesc_configuration_2eproto();
+  friend void protobuf_AssignDesc_configuration_2eproto();
+  friend void protobuf_ShutdownFile_configuration_2eproto();
+
+  void InitAsDefaultInstance();
+  static StateProto* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class PointProto : public ::google::protobuf::Message {
+ public:
+  PointProto();
+  virtual ~PointProto();
+
+  PointProto(const PointProto& from);
+
+  inline PointProto& operator=(const PointProto& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PointProto& default_instance();
+
+  void Swap(PointProto* other);
+
+  // implements Message ----------------------------------------------
+
+  PointProto* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PointProto& from);
+  void MergeFrom(const PointProto& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required float x = 1;
+  inline bool has_x() const;
+  inline void clear_x();
+  static const int kXFieldNumber = 1;
+  inline float x() const;
+  inline void set_x(float value);
+
+  // required float y = 2;
+  inline bool has_y() const;
+  inline void clear_y();
+  static const int kYFieldNumber = 2;
+  inline float y() const;
+  inline void set_y(float value);
+
+  // @@protoc_insertion_point(class_scope:Beta.PointProto)
+ private:
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  float x_;
+  float y_;
+  friend void  protobuf_AddDesc_configuration_2eproto();
+  friend void protobuf_AssignDesc_configuration_2eproto();
+  friend void protobuf_ShutdownFile_configuration_2eproto();
+
+  void InitAsDefaultInstance();
+  static PointProto* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class StatisticProto : public ::google::protobuf::Message {
+ public:
+  StatisticProto();
+  virtual ~StatisticProto();
+
+  StatisticProto(const StatisticProto& from);
+
+  inline StatisticProto& operator=(const StatisticProto& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const StatisticProto& default_instance();
+
+  void Swap(StatisticProto* other);
+
+  // implements Message ----------------------------------------------
+
+  StatisticProto* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const StatisticProto& from);
+  void MergeFrom(const StatisticProto& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated float cls_statistic = 1;
+  inline int cls_statistic_size() const;
+  inline void clear_cls_statistic();
+  static const int kClsStatisticFieldNumber = 1;
+  inline float cls_statistic(int index) const;
+  inline void set_cls_statistic(int index, float value);
+  inline void add_cls_statistic(float value);
+  inline const ::google::protobuf::RepeatedField< float >&
+      cls_statistic() const;
+  inline ::google::protobuf::RepeatedField< float >*
+      mutable_cls_statistic();
+
+  // repeated .Beta.PointProto reg_statistic = 2;
+  inline int reg_statistic_size() const;
+  inline void clear_reg_statistic();
+  static const int kRegStatisticFieldNumber = 2;
+  inline const ::Beta::PointProto& reg_statistic(int index) const;
+  inline ::Beta::PointProto* mutable_reg_statistic(int index);
+  inline ::Beta::PointProto* add_reg_statistic();
+  inline const ::google::protobuf::RepeatedPtrField< ::Beta::PointProto >&
+      reg_statistic() const;
+  inline ::google::protobuf::RepeatedPtrField< ::Beta::PointProto >*
+      mutable_reg_statistic();
+
+  // @@protoc_insertion_point(class_scope:Beta.StatisticProto)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedField< float > cls_statistic_;
+  ::google::protobuf::RepeatedPtrField< ::Beta::PointProto > reg_statistic_;
+  friend void  protobuf_AddDesc_configuration_2eproto();
+  friend void protobuf_AssignDesc_configuration_2eproto();
+  friend void protobuf_ShutdownFile_configuration_2eproto();
+
+  void InitAsDefaultInstance();
+  static StatisticProto* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class NodeProto : public ::google::protobuf::Message {
+ public:
+  NodeProto();
+  virtual ~NodeProto();
+
+  NodeProto(const NodeProto& from);
+
+  inline NodeProto& operator=(const NodeProto& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const NodeProto& default_instance();
+
+  void Swap(NodeProto* other);
+
+  // implements Message ----------------------------------------------
+
+  NodeProto* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const NodeProto& from);
+  void MergeFrom(const NodeProto& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .Beta.StateProto state = 1;
+  inline bool has_state() const;
+  inline void clear_state();
+  static const int kStateFieldNumber = 1;
+  inline const ::Beta::StateProto& state() const;
+  inline ::Beta::StateProto* mutable_state();
+  inline ::Beta::StateProto* release_state();
+  inline void set_allocated_state(::Beta::StateProto* state);
+
+  // required int32 depth = 2 [default = 0];
+  inline bool has_depth() const;
+  inline void clear_depth();
+  static const int kDepthFieldNumber = 2;
+  inline ::google::protobuf::int32 depth() const;
+  inline void set_depth(::google::protobuf::int32 value);
+
+  // required uint64 index = 3 [default = 1];
+  inline bool has_index() const;
+  inline void clear_index();
+  static const int kIndexFieldNumber = 3;
+  inline ::google::protobuf::uint64 index() const;
+  inline void set_index(::google::protobuf::uint64 value);
+
+  // repeated int32 child = 4;
+  inline int child_size() const;
+  inline void clear_child();
+  static const int kChildFieldNumber = 4;
+  inline ::google::protobuf::int32 child(int index) const;
+  inline void set_child(int index, ::google::protobuf::int32 value);
+  inline void add_child(::google::protobuf::int32 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      child() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_child();
+
+  // @@protoc_insertion_point(class_scope:Beta.NodeProto)
+ private:
+  inline void set_has_state();
+  inline void clear_has_state();
+  inline void set_has_depth();
+  inline void clear_has_depth();
+  inline void set_has_index();
+  inline void clear_has_index();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::Beta::StateProto* state_;
+  ::google::protobuf::uint64 index_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > child_;
+  ::google::protobuf::int32 depth_;
+  friend void  protobuf_AddDesc_configuration_2eproto();
+  friend void protobuf_AssignDesc_configuration_2eproto();
+  friend void protobuf_ShutdownFile_configuration_2eproto();
+
+  void InitAsDefaultInstance();
+  static NodeProto* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class TreeProto : public ::google::protobuf::Message {
+ public:
+  TreeProto();
+  virtual ~TreeProto();
+
+  TreeProto(const TreeProto& from);
+
+  inline TreeProto& operator=(const TreeProto& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TreeProto& default_instance();
+
+  void Swap(TreeProto* other);
+
+  // implements Message ----------------------------------------------
+
+  TreeProto* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const TreeProto& from);
+  void MergeFrom(const TreeProto& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .Beta.NodeProto nodes = 1;
+  inline int nodes_size() const;
+  inline void clear_nodes();
+  static const int kNodesFieldNumber = 1;
+  inline const ::Beta::NodeProto& nodes(int index) const;
+  inline ::Beta::NodeProto* mutable_nodes(int index);
+  inline ::Beta::NodeProto* add_nodes();
+  inline const ::google::protobuf::RepeatedPtrField< ::Beta::NodeProto >&
+      nodes() const;
+  inline ::google::protobuf::RepeatedPtrField< ::Beta::NodeProto >*
+      mutable_nodes();
+
+  // @@protoc_insertion_point(class_scope:Beta.TreeProto)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedPtrField< ::Beta::NodeProto > nodes_;
+  friend void  protobuf_AddDesc_configuration_2eproto();
+  friend void protobuf_AssignDesc_configuration_2eproto();
+  friend void protobuf_ShutdownFile_configuration_2eproto();
+
+  void InitAsDefaultInstance();
+  static TreeProto* default_instance_;
 };
 // ===================================================================
 
@@ -449,6 +973,451 @@ inline void ConfigurationProto::set_num_classes(::google::protobuf::int32 value)
   set_has_num_classes();
   num_classes_ = value;
   // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.num_classes)
+}
+
+// -------------------------------------------------------------------
+
+// StateProto
+
+// required int32 x0 = 1 [default = 0];
+inline bool StateProto::has_x0() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void StateProto::set_has_x0() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void StateProto::clear_has_x0() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void StateProto::clear_x0() {
+  x0_ = 0;
+  clear_has_x0();
+}
+inline ::google::protobuf::int32 StateProto::x0() const {
+  // @@protoc_insertion_point(field_get:Beta.StateProto.x0)
+  return x0_;
+}
+inline void StateProto::set_x0(::google::protobuf::int32 value) {
+  set_has_x0();
+  x0_ = value;
+  // @@protoc_insertion_point(field_set:Beta.StateProto.x0)
+}
+
+// required int32 y0 = 2 [default = 0];
+inline bool StateProto::has_y0() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void StateProto::set_has_y0() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void StateProto::clear_has_y0() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void StateProto::clear_y0() {
+  y0_ = 0;
+  clear_has_y0();
+}
+inline ::google::protobuf::int32 StateProto::y0() const {
+  // @@protoc_insertion_point(field_get:Beta.StateProto.y0)
+  return y0_;
+}
+inline void StateProto::set_y0(::google::protobuf::int32 value) {
+  set_has_y0();
+  y0_ = value;
+  // @@protoc_insertion_point(field_set:Beta.StateProto.y0)
+}
+
+// required int32 x1 = 3 [default = 0];
+inline bool StateProto::has_x1() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void StateProto::set_has_x1() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void StateProto::clear_has_x1() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void StateProto::clear_x1() {
+  x1_ = 0;
+  clear_has_x1();
+}
+inline ::google::protobuf::int32 StateProto::x1() const {
+  // @@protoc_insertion_point(field_get:Beta.StateProto.x1)
+  return x1_;
+}
+inline void StateProto::set_x1(::google::protobuf::int32 value) {
+  set_has_x1();
+  x1_ = value;
+  // @@protoc_insertion_point(field_set:Beta.StateProto.x1)
+}
+
+// required int32 y1 = 4 [default = 0];
+inline bool StateProto::has_y1() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void StateProto::set_has_y1() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void StateProto::clear_has_y1() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void StateProto::clear_y1() {
+  y1_ = 0;
+  clear_has_y1();
+}
+inline ::google::protobuf::int32 StateProto::y1() const {
+  // @@protoc_insertion_point(field_get:Beta.StateProto.y1)
+  return y1_;
+}
+inline void StateProto::set_y1(::google::protobuf::int32 value) {
+  set_has_y1();
+  y1_ = value;
+  // @@protoc_insertion_point(field_set:Beta.StateProto.y1)
+}
+
+// required float t = 5 [default = 0];
+inline bool StateProto::has_t() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void StateProto::set_has_t() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void StateProto::clear_has_t() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void StateProto::clear_t() {
+  t_ = 0;
+  clear_has_t();
+}
+inline float StateProto::t() const {
+  // @@protoc_insertion_point(field_get:Beta.StateProto.t)
+  return t_;
+}
+inline void StateProto::set_t(float value) {
+  set_has_t();
+  t_ = value;
+  // @@protoc_insertion_point(field_set:Beta.StateProto.t)
+}
+
+// required int32 xc = 6 [default = 0];
+inline bool StateProto::has_xc() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void StateProto::set_has_xc() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void StateProto::clear_has_xc() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void StateProto::clear_xc() {
+  xc_ = 0;
+  clear_has_xc();
+}
+inline ::google::protobuf::int32 StateProto::xc() const {
+  // @@protoc_insertion_point(field_get:Beta.StateProto.xc)
+  return xc_;
+}
+inline void StateProto::set_xc(::google::protobuf::int32 value) {
+  set_has_xc();
+  xc_ = value;
+  // @@protoc_insertion_point(field_set:Beta.StateProto.xc)
+}
+
+// required int32 yc = 7 [default = 0];
+inline bool StateProto::has_yc() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void StateProto::set_has_yc() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void StateProto::clear_has_yc() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void StateProto::clear_yc() {
+  yc_ = 0;
+  clear_has_yc();
+}
+inline ::google::protobuf::int32 StateProto::yc() const {
+  // @@protoc_insertion_point(field_get:Beta.StateProto.yc)
+  return yc_;
+}
+inline void StateProto::set_yc(::google::protobuf::int32 value) {
+  set_has_yc();
+  yc_ = value;
+  // @@protoc_insertion_point(field_set:Beta.StateProto.yc)
+}
+
+// -------------------------------------------------------------------
+
+// PointProto
+
+// required float x = 1;
+inline bool PointProto::has_x() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void PointProto::set_has_x() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void PointProto::clear_has_x() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void PointProto::clear_x() {
+  x_ = 0;
+  clear_has_x();
+}
+inline float PointProto::x() const {
+  // @@protoc_insertion_point(field_get:Beta.PointProto.x)
+  return x_;
+}
+inline void PointProto::set_x(float value) {
+  set_has_x();
+  x_ = value;
+  // @@protoc_insertion_point(field_set:Beta.PointProto.x)
+}
+
+// required float y = 2;
+inline bool PointProto::has_y() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void PointProto::set_has_y() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void PointProto::clear_has_y() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void PointProto::clear_y() {
+  y_ = 0;
+  clear_has_y();
+}
+inline float PointProto::y() const {
+  // @@protoc_insertion_point(field_get:Beta.PointProto.y)
+  return y_;
+}
+inline void PointProto::set_y(float value) {
+  set_has_y();
+  y_ = value;
+  // @@protoc_insertion_point(field_set:Beta.PointProto.y)
+}
+
+// -------------------------------------------------------------------
+
+// StatisticProto
+
+// repeated float cls_statistic = 1;
+inline int StatisticProto::cls_statistic_size() const {
+  return cls_statistic_.size();
+}
+inline void StatisticProto::clear_cls_statistic() {
+  cls_statistic_.Clear();
+}
+inline float StatisticProto::cls_statistic(int index) const {
+  // @@protoc_insertion_point(field_get:Beta.StatisticProto.cls_statistic)
+  return cls_statistic_.Get(index);
+}
+inline void StatisticProto::set_cls_statistic(int index, float value) {
+  cls_statistic_.Set(index, value);
+  // @@protoc_insertion_point(field_set:Beta.StatisticProto.cls_statistic)
+}
+inline void StatisticProto::add_cls_statistic(float value) {
+  cls_statistic_.Add(value);
+  // @@protoc_insertion_point(field_add:Beta.StatisticProto.cls_statistic)
+}
+inline const ::google::protobuf::RepeatedField< float >&
+StatisticProto::cls_statistic() const {
+  // @@protoc_insertion_point(field_list:Beta.StatisticProto.cls_statistic)
+  return cls_statistic_;
+}
+inline ::google::protobuf::RepeatedField< float >*
+StatisticProto::mutable_cls_statistic() {
+  // @@protoc_insertion_point(field_mutable_list:Beta.StatisticProto.cls_statistic)
+  return &cls_statistic_;
+}
+
+// repeated .Beta.PointProto reg_statistic = 2;
+inline int StatisticProto::reg_statistic_size() const {
+  return reg_statistic_.size();
+}
+inline void StatisticProto::clear_reg_statistic() {
+  reg_statistic_.Clear();
+}
+inline const ::Beta::PointProto& StatisticProto::reg_statistic(int index) const {
+  // @@protoc_insertion_point(field_get:Beta.StatisticProto.reg_statistic)
+  return reg_statistic_.Get(index);
+}
+inline ::Beta::PointProto* StatisticProto::mutable_reg_statistic(int index) {
+  // @@protoc_insertion_point(field_mutable:Beta.StatisticProto.reg_statistic)
+  return reg_statistic_.Mutable(index);
+}
+inline ::Beta::PointProto* StatisticProto::add_reg_statistic() {
+  // @@protoc_insertion_point(field_add:Beta.StatisticProto.reg_statistic)
+  return reg_statistic_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::Beta::PointProto >&
+StatisticProto::reg_statistic() const {
+  // @@protoc_insertion_point(field_list:Beta.StatisticProto.reg_statistic)
+  return reg_statistic_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::Beta::PointProto >*
+StatisticProto::mutable_reg_statistic() {
+  // @@protoc_insertion_point(field_mutable_list:Beta.StatisticProto.reg_statistic)
+  return &reg_statistic_;
+}
+
+// -------------------------------------------------------------------
+
+// NodeProto
+
+// required .Beta.StateProto state = 1;
+inline bool NodeProto::has_state() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void NodeProto::set_has_state() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void NodeProto::clear_has_state() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void NodeProto::clear_state() {
+  if (state_ != NULL) state_->::Beta::StateProto::Clear();
+  clear_has_state();
+}
+inline const ::Beta::StateProto& NodeProto::state() const {
+  // @@protoc_insertion_point(field_get:Beta.NodeProto.state)
+  return state_ != NULL ? *state_ : *default_instance_->state_;
+}
+inline ::Beta::StateProto* NodeProto::mutable_state() {
+  set_has_state();
+  if (state_ == NULL) state_ = new ::Beta::StateProto;
+  // @@protoc_insertion_point(field_mutable:Beta.NodeProto.state)
+  return state_;
+}
+inline ::Beta::StateProto* NodeProto::release_state() {
+  clear_has_state();
+  ::Beta::StateProto* temp = state_;
+  state_ = NULL;
+  return temp;
+}
+inline void NodeProto::set_allocated_state(::Beta::StateProto* state) {
+  delete state_;
+  state_ = state;
+  if (state) {
+    set_has_state();
+  } else {
+    clear_has_state();
+  }
+  // @@protoc_insertion_point(field_set_allocated:Beta.NodeProto.state)
+}
+
+// required int32 depth = 2 [default = 0];
+inline bool NodeProto::has_depth() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void NodeProto::set_has_depth() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void NodeProto::clear_has_depth() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void NodeProto::clear_depth() {
+  depth_ = 0;
+  clear_has_depth();
+}
+inline ::google::protobuf::int32 NodeProto::depth() const {
+  // @@protoc_insertion_point(field_get:Beta.NodeProto.depth)
+  return depth_;
+}
+inline void NodeProto::set_depth(::google::protobuf::int32 value) {
+  set_has_depth();
+  depth_ = value;
+  // @@protoc_insertion_point(field_set:Beta.NodeProto.depth)
+}
+
+// required uint64 index = 3 [default = 1];
+inline bool NodeProto::has_index() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void NodeProto::set_has_index() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void NodeProto::clear_has_index() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void NodeProto::clear_index() {
+  index_ = GOOGLE_ULONGLONG(1);
+  clear_has_index();
+}
+inline ::google::protobuf::uint64 NodeProto::index() const {
+  // @@protoc_insertion_point(field_get:Beta.NodeProto.index)
+  return index_;
+}
+inline void NodeProto::set_index(::google::protobuf::uint64 value) {
+  set_has_index();
+  index_ = value;
+  // @@protoc_insertion_point(field_set:Beta.NodeProto.index)
+}
+
+// repeated int32 child = 4;
+inline int NodeProto::child_size() const {
+  return child_.size();
+}
+inline void NodeProto::clear_child() {
+  child_.Clear();
+}
+inline ::google::protobuf::int32 NodeProto::child(int index) const {
+  // @@protoc_insertion_point(field_get:Beta.NodeProto.child)
+  return child_.Get(index);
+}
+inline void NodeProto::set_child(int index, ::google::protobuf::int32 value) {
+  child_.Set(index, value);
+  // @@protoc_insertion_point(field_set:Beta.NodeProto.child)
+}
+inline void NodeProto::add_child(::google::protobuf::int32 value) {
+  child_.Add(value);
+  // @@protoc_insertion_point(field_add:Beta.NodeProto.child)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+NodeProto::child() const {
+  // @@protoc_insertion_point(field_list:Beta.NodeProto.child)
+  return child_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+NodeProto::mutable_child() {
+  // @@protoc_insertion_point(field_mutable_list:Beta.NodeProto.child)
+  return &child_;
+}
+
+// -------------------------------------------------------------------
+
+// TreeProto
+
+// repeated .Beta.NodeProto nodes = 1;
+inline int TreeProto::nodes_size() const {
+  return nodes_.size();
+}
+inline void TreeProto::clear_nodes() {
+  nodes_.Clear();
+}
+inline const ::Beta::NodeProto& TreeProto::nodes(int index) const {
+  // @@protoc_insertion_point(field_get:Beta.TreeProto.nodes)
+  return nodes_.Get(index);
+}
+inline ::Beta::NodeProto* TreeProto::mutable_nodes(int index) {
+  // @@protoc_insertion_point(field_mutable:Beta.TreeProto.nodes)
+  return nodes_.Mutable(index);
+}
+inline ::Beta::NodeProto* TreeProto::add_nodes() {
+  // @@protoc_insertion_point(field_add:Beta.TreeProto.nodes)
+  return nodes_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::Beta::NodeProto >&
+TreeProto::nodes() const {
+  // @@protoc_insertion_point(field_list:Beta.TreeProto.nodes)
+  return nodes_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::Beta::NodeProto >*
+TreeProto::mutable_nodes() {
+  // @@protoc_insertion_point(field_mutable_list:Beta.TreeProto.nodes)
+  return &nodes_;
 }
 
 

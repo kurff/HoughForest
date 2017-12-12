@@ -37,6 +37,7 @@
         "utility": "cpp",
         "codecvt": "cpp",
         "*.ipp": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "string": "cpp"
     }
 }

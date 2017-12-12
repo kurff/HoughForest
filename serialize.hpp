@@ -9,6 +9,7 @@
 #include <stdint.h>
 using google::protobuf::Message;
 using google::protobuf::io::FileInputStream;
+using google::protobuf::io::FileOutputStream;
 #include <fstream>
 #include <string>
 #include <unistd.h>
@@ -36,14 +37,11 @@ namespace Beta{
             template<typename State>
             void serialize(string file, Tree<State>* tree){
 
-                TreeProto tree_proto;
+                shared_ptr<TreeProto> tree_proto = shared_ptr<TreeProto>(new TreeProto);
+                
                 
 
-                int fd = open(file.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0644);
-                FileOutputStream* output = new FileOutputStream(fd);
-                google::protobuf::TextFormat::Print(tree_proto, output);
-                delete output;
-                close(fd);
+
             }
 
             template<typename State>
@@ -62,7 +60,9 @@ namespace Beta{
 
             }
         protected:
-            
+
+
+
 
 
 
