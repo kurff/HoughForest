@@ -276,10 +276,20 @@ class Tree{
         const size_t size(){return nodes_.size();}
         const unsigned long counter(){return counter_;}
         const int L(){return L_;}
-        const queue<Node<State>* > leafs(){return leafs_;}
-        const std::map<unsigned long, Node<State>* > nodes(){return nodes_;}
+        const queue<Node<State>* >& leafs(){return leafs_;}
+        const std::map<unsigned long, Node<State>* >& nodes(){return nodes_;}
+        Node<State>* get_node(int index){
+            Iterator it = nodes_.find(index);
+            if(it == nodes_.end()){
+                DLOG(INFO)<<"can not find node "<< node->name(); 
+                return nullptr;
+            }
+            return it->second;
+        }
 
-
+        const size_t get_size(){
+            return nodes_.size();
+        }
 
 
 

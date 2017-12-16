@@ -21,6 +21,7 @@ using google::protobuf::io::FileOutputStream;
 
 #include "tree.hpp"
 
+#include "utils/utils.hpp"
 using namespace std;
 
 namespace Beta{
@@ -38,6 +39,19 @@ namespace Beta{
             void serialize(string file, Tree<State>* tree){
 
                 shared_ptr<TreeProto> tree_proto = shared_ptr<TreeProto>(new TreeProto);
+                
+                const size_t tree_size = tree->get_size();
+                for(size_t i = 0; i < tree_size; ++ i){
+                    Node<State>* node = tree->get_node(i);
+                    NodeProto* node_proto = tree_proto->add_nodes();
+                    node_proto->set_depth(node->depth());
+                    node_proto->set_index(node->index());
+                }
+
+                write_txt(tree_proto,file);
+
+                
+
                 
                 
 

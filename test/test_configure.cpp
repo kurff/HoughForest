@@ -9,7 +9,7 @@ TEST(SELECTOR, generation){
 }
 
 TEST(TreeProto, save){
-    TreeProto* tree_proto = new TreeProto();
+    //TreeProto* tree_proto = new TreeProto();
     //tree_proto->
 
 

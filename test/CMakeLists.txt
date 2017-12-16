@@ -19,4 +19,9 @@ add_test(NAME test_selector COMMAND random_generation)
 add_executable(test_configure  test_configure.cpp ../proto/configuration.pb.cc)
 target_link_libraries(test_configure gtest gtest_main glog protobuf opencv_highgui opencv_core opencv_imgproc)
 add_test(NAME test_configure COMMAND readtxt)
+
+
+add_executable(test_serialize  test_serialization.cpp ../proto/configuration.pb.cc)
+target_link_libraries(test_serialize gtest gtest_main glog protobuf opencv_highgui opencv_core opencv_imgproc)
+add_test(NAME test_serialize COMMAND savetxt)
 endif()
