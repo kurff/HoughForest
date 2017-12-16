@@ -3,11 +3,13 @@
 #include <vector>
 #include "opencv2/opencv.hpp"
 #include <algorithm>
+#include <string>
 // #include "feature.hpp"
 // #include "configure.hpp"
 // #include "selector.hpp"
 using namespace std;
 using namespace cv;
+
 
 
 
@@ -33,7 +35,7 @@ bool compare(const Image & i1, const Image& i2 ){
 }
 
 
-template<typename State>
+//template<typename State>
 class Data{
     public:
         Data(){
@@ -48,7 +50,11 @@ class Data{
         }
 
 
-    
+        void load_data(string path){
+
+            
+
+        }
 
     
 

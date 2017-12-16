@@ -3,8 +3,13 @@ project(Beta)
 option(test "Build all tests." ON)
 SET(CMAKE_C_COMPILER g++)
 add_compile_options(-std=c++11)
-include_directories(../)
-link_directories(/usr/local/lib)
+include_directories(../  /usr/include/freetype2)
+link_directories(/usr/local/lib /usr/lib)
+
+
+add_executable(test_fonts  test_fonts.cpp)
+
+target_link_libraries(test_fonts freetype)
 
 if (test)
 enable_testing()

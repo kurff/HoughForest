@@ -4,7 +4,6 @@
 
 TEST(ICDAR2013, readName){
     Dataset* dataset = new ICDAR2013();
-
     dataset->get_train_names("../train.txt");
     string path = "/media/kurff/d45400e1-76eb-453c-a31e-9ae30fafb7fd/data/ICDAR2013/";
     dataset->read_train_anotation(path);

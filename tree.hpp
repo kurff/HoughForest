@@ -210,12 +210,12 @@ class Tree{
 
         }
 
-        void train(Data<State>& data){
+        void train(Data& data){
             Node<State>* node = new Node<State>("root");
             node->sindex() = ++ counter_;
             node->sdepth() = 0;
             add_node(node);
-            train_recurse(data.begin(), data.end(),0);
+            train_recurse(data.data_.begin(), data.data_.end(),0);
 
 
 

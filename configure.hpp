@@ -20,16 +20,10 @@ using namespace std;
 
 namespace Beta{
     class Config{
-
         public:
-
             ConfigurationProto configuration_;
-
-
-
             void read_from_text(string file){
-                int fd = open(file.c_str(), O_RDONLY);
-                
+                int fd = open(file.c_str(), O_RDONLY);      
                 FileInputStream* input = new FileInputStream(fd);
                 bool success = google::protobuf::TextFormat::Parse(input, (Message*)(&configuration_));
                 delete input;
