@@ -10,5 +10,11 @@ TEST(SERIALIZE, save){
     config->read_from_text("config.txt");
     Tree<int>* tree =new Tree<int>(*config);
     Serialize* ptr_ser = new Serialize();
-    ptr_ser ->serialize<int>("1.txt", tree);    
+    ptr_ser ->serialize_binary<int>("1.txt", tree); 
+
+    Tree<int>* tree0 = new Tree<int>(*config);
+    ptr_ser->deserialize_binary<int>("1.txt",tree);
+
+    
+
 }

@@ -7,6 +7,13 @@
 using google::protobuf::Message;
 using google::protobuf::io::FileInputStream;
 using google::protobuf::io::FileOutputStream;
+using google::protobuf::io::ZeroCopyInputStream;
+using google::protobuf::io::CodedInputStream;
+using google::protobuf::io::ZeroCopyOutputStream;
+using google::protobuf::io::CodedOutputStream;
+
+
+
 #include <fstream>
 #include <string>
 #include <unistd.h>
@@ -15,7 +22,7 @@ using google::protobuf::io::FileOutputStream;
 #include <fcntl.h>
 #include <iostream>
 #include "glog/logging.h"
-
+#include <stdint.h>
 using namespace std;
 namespace Beta{
 
@@ -28,9 +35,21 @@ namespace Beta{
         close(fd);
     }
     void write_binary(Message* message, string file){
-
+        fstream output(file, ios::out | ios::trunc | ios::binary);
+        message->SerializeToOstream(&output);
     }
 
+    void read_binary(Message* message, string file){
+        int fd = open(file.c_str(), O_RDONLY);
+        ZeroCopyInputStream* raw_input = new FileInputStream(fd);
+        CodedInputStream* coded_input = new CodedInputStream(raw_input);
+        coded_input->SetTotalBytesLimit(INT_MAX, 536870912);
+        bool success = message->ParseFromCodedStream(coded_input);
+        delete coded_input;
+        delete raw_input;
+        close(fd);
+
+    }
 
     void read_txt(Message* message, string file){
         int fd = open(file.c_str(), O_RDONLY);

@@ -28,7 +28,7 @@ namespace Beta{
     class Serialize{
         public:
             Serialize(){
-
+                tree_proto_ = shared_ptr<TreeProto>(new TreeProto);        
             }
 
             ~Serialize(){
@@ -36,47 +36,46 @@ namespace Beta{
             }
 
             template<typename State>
-            void serialize(string file, Tree<State>* tree){
-
-                shared_ptr<TreeProto> tree_proto = shared_ptr<TreeProto>(new TreeProto);
-                
+            void transform(Tree<State>* tree){
                 const size_t tree_size = tree->get_size();
                 for(size_t i = 0; i < tree_size; ++ i){
                     Node<State>* node = tree->get_node(i);
-                    NodeProto* node_proto = tree_proto->add_nodes();
+                    NodeProto* node_proto = tree_proto_->add_nodes();
                     node_proto->set_depth(node->depth());
                     //node_proto->set_depth(1);
                     node_proto->set_index(node->index());
                 }
                 //tree_proto->set
-                tree_proto->set_counter(tree->counter());
-                write_txt(tree_proto.get(),file);
+                tree_proto_->set_counter(tree->counter());
+            }
+            
 
-                
-
-                
-                
-
-
+            template<typename State>
+            void serialize(string file, Tree<State>* tree){     
+                transform(tree);
+                write_txt(tree_proto_.get(),file);
             }
 
             template<typename State>
             void deserialize(string file, Tree<State>* tree){
-
+                read_txt(tree_proto_.get(), file);
 
             }
 
             template<typename State>
             void serialize_binary(string file, Tree<State>* tree){
+                transform(tree);
+                write_binary(tree_proto_.get(), file);
 
             }
             template<typename State>
             void deserialize_binary(string file, Tree<State>* tree){
+                read_binary(tree_proto_.get(), file);
 
 
             }
         protected:
-
+            shared_ptr<TreeProto> tree_proto_;
 
 
 
