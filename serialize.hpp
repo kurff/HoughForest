@@ -45,10 +45,12 @@ namespace Beta{
                     Node<State>* node = tree->get_node(i);
                     NodeProto* node_proto = tree_proto->add_nodes();
                     node_proto->set_depth(node->depth());
+                    //node_proto->set_depth(1);
                     node_proto->set_index(node->index());
                 }
-
-                write_txt(tree_proto,file);
+                //tree_proto->set
+                tree_proto->set_counter(tree->counter());
+                write_txt(tree_proto.get(),file);
 
                 
 

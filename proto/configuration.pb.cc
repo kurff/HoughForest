@@ -144,8 +144,9 @@ void protobuf_AssignDesc_configuration_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(NodeProto));
   TreeProto_descriptor_ = file->message_type(5);
-  static const int TreeProto_offsets_[1] = {
+  static const int TreeProto_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TreeProto, nodes_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TreeProto, counter_),
   };
   TreeProto_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -223,8 +224,8 @@ void protobuf_AddDesc_configuration_2eproto() {
     "\'\n\rreg_statistic\030\002 \003(\0132\020.Beta.PointProto"
     "\"_\n\tNodeProto\022\037\n\005state\030\001 \002(\0132\020.Beta.Stat"
     "eProto\022\020\n\005depth\030\002 \002(\005:\0010\022\020\n\005index\030\003 \002(\004:"
-    "\0011\022\r\n\005child\030\004 \003(\005\"+\n\tTreeProto\022\036\n\005nodes\030"
-    "\001 \003(\0132\017.Beta.NodeProto", 662);
+    "\0011\022\r\n\005child\030\004 \003(\005\"<\n\tTreeProto\022\036\n\005nodes\030"
+    "\001 \003(\0132\017.Beta.NodeProto\022\017\n\007counter\030\002 \002(\004", 679);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "configuration.proto", &protobuf_RegisterTypes);
   ConfigurationProto::default_instance_ = new ConfigurationProto();
@@ -2187,6 +2188,7 @@ void NodeProto::Swap(NodeProto* other) {
 
 #ifndef _MSC_VER
 const int TreeProto::kNodesFieldNumber;
+const int TreeProto::kCounterFieldNumber;
 #endif  // !_MSC_VER
 
 TreeProto::TreeProto()
@@ -2207,6 +2209,7 @@ TreeProto::TreeProto(const TreeProto& from)
 
 void TreeProto::SharedCtor() {
   _cached_size_ = 0;
+  counter_ = GOOGLE_ULONGLONG(0);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -2242,6 +2245,7 @@ TreeProto* TreeProto::New() const {
 }
 
 void TreeProto::Clear() {
+  counter_ = GOOGLE_ULONGLONG(0);
   nodes_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -2267,6 +2271,21 @@ bool TreeProto::MergePartialFromCodedStream(
           goto handle_unusual;
         }
         if (input->ExpectTag(10)) goto parse_nodes;
+        if (input->ExpectTag(16)) goto parse_counter;
+        break;
+      }
+
+      // required uint64 counter = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_counter:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &counter_)));
+          set_has_counter();
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -2302,6 +2321,11 @@ void TreeProto::SerializeWithCachedSizes(
       1, this->nodes(i), output);
   }
 
+  // required uint64 counter = 2;
+  if (has_counter()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->counter(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -2319,6 +2343,11 @@ void TreeProto::SerializeWithCachedSizes(
         1, this->nodes(i), target);
   }
 
+  // required uint64 counter = 2;
+  if (has_counter()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->counter(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -2330,6 +2359,15 @@ void TreeProto::SerializeWithCachedSizes(
 int TreeProto::ByteSize() const {
   int total_size = 0;
 
+  if (_has_bits_[1 / 32] & (0xffu << (1 % 32))) {
+    // required uint64 counter = 2;
+    if (has_counter()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt64Size(
+          this->counter());
+    }
+
+  }
   // repeated .Beta.NodeProto nodes = 1;
   total_size += 1 * this->nodes_size();
   for (int i = 0; i < this->nodes_size(); i++) {
@@ -2364,6 +2402,11 @@ void TreeProto::MergeFrom(const ::google::protobuf::Message& from) {
 void TreeProto::MergeFrom(const TreeProto& from) {
   GOOGLE_CHECK_NE(&from, this);
   nodes_.MergeFrom(from.nodes_);
+  if (from._has_bits_[1 / 32] & (0xffu << (1 % 32))) {
+    if (from.has_counter()) {
+      set_counter(from.counter());
+    }
+  }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -2380,6 +2423,7 @@ void TreeProto::CopyFrom(const TreeProto& from) {
 }
 
 bool TreeProto::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
 
   if (!::google::protobuf::internal::AllAreInitialized(this->nodes())) return false;
   return true;
@@ -2388,6 +2432,7 @@ bool TreeProto::IsInitialized() const {
 void TreeProto::Swap(TreeProto* other) {
   if (other != this) {
     nodes_.Swap(&other->nodes_);
+    std::swap(counter_, other->counter_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

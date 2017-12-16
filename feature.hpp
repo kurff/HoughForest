@@ -1,6 +1,8 @@
 #ifndef __FEATURE_HPP__
 #define __FEATURE_HPP__
 #include "configure.hpp"
+#include "opencv2/opencv.hpp"
+using namespace cv;
 namespace Beta{
 
 template<typename State>
@@ -9,7 +11,7 @@ class Feature{
         Feature(const Config& config): config_(config){}
         ~Feature(){}
 
-        float extract(const cv::Mat& image, const State& state){
+        float extract(const Mat& image, const State& state){
             int x0 = state.xc_ + state.x0_;
             int y0 = state.yc_ + state.y0_;
             int x1 = state.xc_ + state.x1_;

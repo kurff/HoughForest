@@ -23,19 +23,21 @@ namespace Beta{
     };
 
     class ClsStatistic: public Statistic{
-
+        typedef typename vector<Image>::iterator IIterator;
 
         public:
             ClsStatistic(int dim):dim_(dim){
-                cls_statistic_ = shared_ptr<float>(new float [dim_] );
+                cls_statistic_ = new float [dim_] ;
             }
             ~ClsStatistic(){
-
+                if(cls_statistic_ != nullptr){
+                    delete [] cls_statistic_;
+                }
             }
 
             const int & dim(){return dim_;}
             void run(const IIterator& begin, const IIterator& end){
-                memset(cls_statistic_.get(), 0 , sizeof(float)* dim_);
+                memset(cls_statistic_, 0 , sizeof(float)* dim_);
                 int count = 0;
                 for(IIterator it =begin; it != end; ++ it, ++ count){
                     cls_statistic_[it->label_] ++;
@@ -45,18 +47,22 @@ namespace Beta{
                 }
             }
         protected:
-            shared_ptr<float> cls_statistic_;
+            float* cls_statistic_;
             int dim_;
     };
 
     class RegStatistic: public Statistic{
+        typedef typename vector<Image>::iterator IIterator;
         public:
             RegStatistic(int dim):dim_(dim){
-                reg_statistic_ = shared_ptr<Point2f>(new Point2f[dim_]());
+                reg_statistic_ = new Point2f[dim_]();
 
             }
 
             ~RegStatistic(){
+                if(reg_statistic_ != nullptr){
+                    delete [] reg_statistic_;
+                }
 
             }
 
@@ -69,15 +75,16 @@ namespace Beta{
                     for(IIterator it =begin; it != end; ++ it, ++ count){
                        reg_statistic_[i] +=  it->keypoints_[i];
                     }
-                    reg_statistic_[i] /= float(count) + 1e-6;
+                    reg_statistic_[i].x /= float(count) + 1e-6;
+                    reg_statistic_[i].y /= float(count) + 1e-6;
                 }
             }
 
         protected:
-            shared_ptr<Point2f> reg_statistic_;
+            Point2f* reg_statistic_;
             int dim_;
 
-    }
+    };
 
 
 

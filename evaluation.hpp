@@ -13,6 +13,7 @@ using namespace cv;
 namespace Beta{
 
 class Evaluation{
+    typedef typename vector<Image>::iterator IIterator;
     public:
         Evaluation(){
 
@@ -40,12 +41,15 @@ class RegressionEvaluation: public Evaluation{
             vector<Point2f> mean_left;
             mean_left.resize(num_keypoints_);
             int count = 0;
+            IIterator it;
             for(int i = 0; i < num_keypoints_; ++ i){
                 mean_left[i] = Point2f(0.0f,0.0f);
-                for(IIterator it = begin, count=0; it != middle; ++ it, ++count){
+
+                for(it = begin, count = 0; it != middle; ++ it, ++count){
                     mean_left[i] += it->keypoints_[i];
                 }
-                mean_left[i] /= float(count) + 0.01;
+                mean_left[i].x /= float(count) + FLOAT_EPS;
+                mean_left[i].y /= float(count) + FLOAT_EPS;
 
             }
             
@@ -55,21 +59,22 @@ class RegressionEvaluation: public Evaluation{
 
             for(int i = 0; i < num_keypoints_; ++ i ){
                 mean_right[i] = Point2f(0.0f,0.0f);
-                for(IIterator it = middle, count=0; it != end; ++ it, ++count){
+                for(it = middle, count=0; it != end; ++ it, ++count){
                     mean_right[i] += it->keypoints_[i];
                 }
-                mean_right[i] /= float(count) + FLOAT_EPS;
+                mean_right[i].x /= float(count) + FLOAT_EPS;
+                mean_right[i].y /= float(count) + FLOAT_EPS;
             }
 
             float dis_left = 0.0f, dis_right = 0.0f;
             Point2f t;
             for(int i = 0; i < num_keypoints_; ++ i){
-                for(IIterator it = begin, count=0; it != middle; ++ it, ++count){
+                for( it = begin, count=0; it != middle; ++ it, ++count){
                     t = (it->keypoints_[i] - mean_left[i]);
                     dis_left += t.x * t.x + t.y * t.y;
                 }
                 dis_left /= float(count) + FLOAT_EPS;
-                for(IIterator it = middle, count=0; it != end; ++ it, ++count){
+                for( it = middle, count=0; it != end; ++ it, ++count){
                     t = (it->keypoints_[i] - mean_right[i]);
                     dis_right += t.x * t.x + t.y * t.y;
                 }
@@ -94,13 +99,14 @@ class ClassificationEvaluation: public Evaluation{
     public:
         ClassificationEvaluation(const Config & config){
             num_classes_ = config.configuration_.num_classes();
-            histogram_left_ = shared_ptr<float> (new float [num_classes_] ());
-            histogram_right_ = shared_ptr<float> (new float [num_classes_] ());
+            histogram_left_ = new float [num_classes_] ();
+            histogram_right_ = new float [num_classes_] ();
             //histogram_all_ = shared_ptr<float>(new float [num_classes_]());
 
         }
         ~ClassificationEvaluation(){
-            
+            delete [] histogram_left_;
+            delete [] histogram_right_;
         }
 
         // void set(const IIterator& begin, const IIterator& end){
@@ -114,18 +120,19 @@ class ClassificationEvaluation: public Evaluation{
         float calculate(const IIterator& begin, const IIterator& middle, const IIterator& end){
             float entropy_left = 0.0f;
             float entropy_right = 0.0f;
-            memset(histogram_left_.get(), 0 , sizeof(float)*num_classes_);
-            memset(histogram_right_.get(), 0, sizeof(float)*num_classes_);
+            memset(histogram_left_, 0 , sizeof(float)*num_classes_);
+            memset(histogram_right_, 0, sizeof(float)*num_classes_);
             //memcpy(histogram_right_, histogram_all_, sizeof(float)* num_classes_);
             int count_left = 0 , count_right = 0;
-            for(IIterator it = begin, count_left=0; it != middle; ++ it, ++count_left){
+            IIterator it;
+            for(it = begin, count_left=0; it != middle; ++ it, ++count_left){
                 histogram_left_[it->label_] ++ ;
             }
             for(int i = 0; i < num_classes_; ++ i){
                 histogram_left_[i] / float(count_left);
             }
 
-            for(IIterator it = middle, count_right=0; it != end; ++ it, ++count_right){
+            for(it = middle, count_right=0; it != end; ++ it, ++count_right){
                 histogram_right_[it->label_] ++ ;
             }
 
@@ -146,8 +153,8 @@ class ClassificationEvaluation: public Evaluation{
         }
     protected:
         int num_classes_;
-        shared_ptr<float> histogram_left_;
-        shared_ptr<float> histogram_right_;
+        float* histogram_left_;
+        float* histogram_right_;
         //shared_ptr<float> histogram_all_
         
 

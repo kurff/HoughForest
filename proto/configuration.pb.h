@@ -713,14 +713,24 @@ class TreeProto : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::Beta::NodeProto >*
       mutable_nodes();
 
+  // required uint64 counter = 2;
+  inline bool has_counter() const;
+  inline void clear_counter();
+  static const int kCounterFieldNumber = 2;
+  inline ::google::protobuf::uint64 counter() const;
+  inline void set_counter(::google::protobuf::uint64 value);
+
   // @@protoc_insertion_point(class_scope:Beta.TreeProto)
  private:
+  inline void set_has_counter();
+  inline void clear_has_counter();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::google::protobuf::RepeatedPtrField< ::Beta::NodeProto > nodes_;
+  ::google::protobuf::uint64 counter_;
   friend void  protobuf_AddDesc_configuration_2eproto();
   friend void protobuf_AssignDesc_configuration_2eproto();
   friend void protobuf_ShutdownFile_configuration_2eproto();
@@ -1418,6 +1428,30 @@ inline ::google::protobuf::RepeatedPtrField< ::Beta::NodeProto >*
 TreeProto::mutable_nodes() {
   // @@protoc_insertion_point(field_mutable_list:Beta.TreeProto.nodes)
   return &nodes_;
+}
+
+// required uint64 counter = 2;
+inline bool TreeProto::has_counter() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void TreeProto::set_has_counter() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void TreeProto::clear_has_counter() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void TreeProto::clear_counter() {
+  counter_ = GOOGLE_ULONGLONG(0);
+  clear_has_counter();
+}
+inline ::google::protobuf::uint64 TreeProto::counter() const {
+  // @@protoc_insertion_point(field_get:Beta.TreeProto.counter)
+  return counter_;
+}
+inline void TreeProto::set_counter(::google::protobuf::uint64 value) {
+  set_has_counter();
+  counter_ = value;
+  // @@protoc_insertion_point(field_set:Beta.TreeProto.counter)
 }
 
 

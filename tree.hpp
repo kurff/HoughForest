@@ -59,6 +59,7 @@ class Node{
         const float Q(){return Q_;}
         const float P(){return P_;}
         const float U(){return U_;}
+        const int depth(){return depth_;}
         const string name(){return name_;}
         const unsigned long index(){return index_;}
         const map<unsigned long, Node<State> * > child(){return child_;}
@@ -93,11 +94,11 @@ class Tree{
     typedef typename map<unsigned long, Node<State>* >::iterator Iterator;
     typedef typename vector<Image>::iterator IIterator;
     public:
-        Tree(const Config& config):counter_(-1){
+        Tree(const Config& config):counter_(0){
             L_ = config.configuration_.max_depth();
-            feature_ = shared_ptr<Feature<State>  > (new Feature(config));
+            feature_ = shared_ptr<Feature<State>  > (new Feature<State>(config));
             int context_patch = config.configuration_.context_patch();
-            selector_ = shared_ptr<Selector<State> >(new Selector(- context_patch, context_patch));
+            selector_ = shared_ptr<Selector<State> >(new Selector<State>(- context_patch, context_patch));
             dim_features_ = config.configuration_.dim_features();
 
             reg_eval_ = shared_ptr<Evaluation> (new RegressionEvaluation(config));
@@ -209,9 +210,9 @@ class Tree{
 
         }
 
-        void train(Data& data){
+        void train(Data<State>& data){
             Node<State>* node = new Node<State>("root");
-            node->sindex() = ++ count;
+            node->sindex() = ++ counter_;
             node->sdepth() = 0;
             add_node(node);
             train_recurse(data.begin(), data.end(),0);
@@ -239,10 +240,10 @@ class Tree{
                 }
                 sort(begin,end, compare);
 
-                eval_ = random_generation.NextDouble() > 0.5 ? reg_val_ : cls_eval_;
+                eval_ = random_generator.NextDouble() > 0.5 ? reg_eval_ : cls_eval_;
               
                 
-                for(IIterator it  = begin, it != end; ++ it){
+                for(IIterator it  = begin; it != end; ++ it){
                     val  = eval_->calculate(begin, it, end);
                     if(max_val <= val){
                         max_val = val;
@@ -258,12 +259,12 @@ class Tree{
             if(depth >= L_){
                 return;
             }
-            Node<State>* node_left = new Node<State>("Node"+std::to_string(count+1) );
+            Node<State>* node_left = new Node<State>("Node"+std::to_string(counter_+1) );
             node_left->sdepth() = depth + 1;
             add_node(node, node_left);
             train_recurse(begin, best, depth+1);
 
-            Node<State>* node_right = new Node<State>("Node"+std::to_string(count+1));
+            Node<State>* node_right = new Node<State>("Node"+std::to_string(counter_+1));
             node_right->sdepth() = depth + 1;
             add_node(node, node_right);
             train_recurse(best, end, depth+1);
@@ -281,7 +282,7 @@ class Tree{
         Node<State>* get_node(int index){
             Iterator it = nodes_.find(index);
             if(it == nodes_.end()){
-                DLOG(INFO)<<"can not find node "<< node->name(); 
+                DLOG(INFO)<<"can not find node "; 
                 return nullptr;
             }
             return it->second;

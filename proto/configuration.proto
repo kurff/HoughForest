@@ -48,6 +48,7 @@ message NodeProto{
 
 message TreeProto{
     repeated NodeProto nodes =1;
+    required uint64 counter = 2;
     
 
 
