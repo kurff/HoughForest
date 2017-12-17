@@ -23,8 +23,8 @@ int main(int argc, char* argv []){
   // waitKey(0);
   // imwrite("font.png", img);
 
-
-  Synthesis* syn = new Synthesis("fonts.txt");
+  string path="/media/kurff/d45400e1-76eb-453c-a31e-9ae30fafb7fd/local_binary_regression/data/";
+  Synthesis* syn = new Synthesis("fonts.txt",path);
   syn->init();
   syn->run();
   syn->destroy();

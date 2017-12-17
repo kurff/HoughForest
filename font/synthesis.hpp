@@ -12,11 +12,12 @@ using namespace std;
 namespace Beta{
     class Synthesis{
         public:
-            Synthesis(string fonts_list_file): fonts_list_file_(fonts_list_file){
+            Synthesis(string fonts_list_file, string path): fonts_list_file_(fonts_list_file),path_(path){
                 height_ = 64;
                 width_= 64;
                 characters_="0123456789ABCDEFGHIJKLMNOPQRSTUYWXYZabcdefghijklmnopqrstuvwxyz";
                 num_grid_ = 4;
+                count_ = 0;
             }
 
             ~Synthesis(){
@@ -96,22 +97,35 @@ namespace Beta{
 
                 imshow("keypoints", vis);
                 waitKey(0);
+            }
 
+            void save_image_keypoints(const Mat& image, const vector<Point2f>& keypoints, int index){
 
+                imwrite(path_+"/images/"+characters_[index]+"_"+std::to_string(count_)+".png", image);
 
+                ofstream fo(path_+"/keypoints/"+characters_[index]+"_"+std::to_string(count_)+".txt", ios::out);
+
+                for(int i = 0; i < keypoints.size(); ++ i){
+                    fo<< keypoints[i].x <<" "<< keypoints[i].y<<endl;
+                }
+
+                fo.close();
             }
 
 
 
-            void run(){
+            void run( ){
 
                 vector<Point2f> keypoints;
                 for(int i = 0; i < fonts_.size(); ++i){
                     for(int j = 0; j < characters_.length(); ++ j){
+                        ++ count_;
                         fonts_[i]->draw(characters_, j);
                         Mat image = fonts_[i]->get();
                         get_keypoints(image, keypoints);
-                        visualize_keypoints(image, keypoints);
+                        //visualize_keypoints(image, keypoints);
+                        save_image_keypoints(image, keypoints, j);
+
                     }
                 }
 
@@ -132,7 +146,8 @@ namespace Beta{
             int width_;
             string characters_;
             int num_grid_;
-
+            string path_;
+            int count_;
 
 
 

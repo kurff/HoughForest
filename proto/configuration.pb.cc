@@ -49,7 +49,7 @@ void protobuf_AssignDesc_configuration_2eproto() {
       "configuration.proto");
   GOOGLE_CHECK(file != NULL);
   ConfigurationProto_descriptor_ = file->message_type(0);
-  static const int ConfigurationProto_offsets_[10] = {
+  static const int ConfigurationProto_offsets_[12] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, max_depth_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, num_trees_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, mode_),
@@ -60,6 +60,8 @@ void protobuf_AssignDesc_configuration_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, dim_features_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, num_keypoints_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, num_classes_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, file_list_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, path_),
   };
   ConfigurationProto_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -190,6 +192,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void protobuf_ShutdownFile_configuration_2eproto() {
   delete ConfigurationProto::default_instance_;
   delete ConfigurationProto_reflection_;
+  delete ConfigurationProto::_default_file_list_;
   delete StateProto::default_instance_;
   delete StateProto_reflection_;
   delete PointProto::default_instance_;
@@ -209,25 +212,29 @@ void protobuf_AddDesc_configuration_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023configuration.proto\022\004Beta\"\376\001\n\022Configur"
+    "\n\023configuration.proto\022\004Beta\"\254\002\n\022Configur"
     "ationProto\022\024\n\tmax_depth\030\001 \002(\005:\0015\022\024\n\tnum_"
     "trees\030\002 \002(\005:\0013\022\017\n\004mode\030\003 \002(\005:\0012\022\031\n\013min_e"
     "ntropy\030\004 \002(\002:\0040.01\022\023\n\006height\030\005 \002(\005:\003100\022"
     "\022\n\005width\030\006 \002(\005:\003100\022\031\n\rcontext_patch\030\007 \002"
     "(\005:\00250\022\031\n\014dim_features\030\010 \002(\005:\003100\022\031\n\rnum"
     "_keypoints\030\t \002(\005:\00210\022\026\n\013num_classes\030\n \002("
-    "\005:\0012\"t\n\nStateProto\022\r\n\002x0\030\001 \002(\005:\0010\022\r\n\002y0\030"
-    "\002 \002(\005:\0010\022\r\n\002x1\030\003 \002(\005:\0010\022\r\n\002y1\030\004 \002(\005:\0010\022\014"
-    "\n\001t\030\005 \002(\002:\0010\022\r\n\002xc\030\006 \002(\005:\0010\022\r\n\002yc\030\007 \002(\005:"
-    "\0010\"\"\n\nPointProto\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\"P"
-    "\n\016StatisticProto\022\025\n\rcls_statistic\030\001 \003(\002\022"
-    "\'\n\rreg_statistic\030\002 \003(\0132\020.Beta.PointProto"
-    "\"_\n\tNodeProto\022\037\n\005state\030\001 \002(\0132\020.Beta.Stat"
-    "eProto\022\020\n\005depth\030\002 \002(\005:\0010\022\020\n\005index\030\003 \002(\004:"
-    "\0011\022\r\n\005child\030\004 \003(\005\"<\n\tTreeProto\022\036\n\005nodes\030"
-    "\001 \003(\0132\017.Beta.NodeProto\022\017\n\007counter\030\002 \002(\004", 679);
+    "\005:\0012\022\034\n\tfile_list\030\013 \002(\t:\ttrain.txt\022\016\n\004pa"
+    "th\030\014 \002(\t:\000\"t\n\nStateProto\022\r\n\002x0\030\001 \002(\005:\0010\022"
+    "\r\n\002y0\030\002 \002(\005:\0010\022\r\n\002x1\030\003 \002(\005:\0010\022\r\n\002y1\030\004 \002("
+    "\005:\0010\022\014\n\001t\030\005 \002(\002:\0010\022\r\n\002xc\030\006 \002(\005:\0010\022\r\n\002yc\030"
+    "\007 \002(\005:\0010\"\"\n\nPointProto\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002"
+    " \002(\002\"P\n\016StatisticProto\022\025\n\rcls_statistic\030"
+    "\001 \003(\002\022\'\n\rreg_statistic\030\002 \003(\0132\020.Beta.Poin"
+    "tProto\"_\n\tNodeProto\022\037\n\005state\030\001 \002(\0132\020.Bet"
+    "a.StateProto\022\020\n\005depth\030\002 \002(\005:\0010\022\020\n\005index\030"
+    "\003 \002(\004:\0011\022\r\n\005child\030\004 \003(\005\"<\n\tTreeProto\022\036\n\005"
+    "nodes\030\001 \003(\0132\017.Beta.NodeProto\022\017\n\007counter\030"
+    "\002 \002(\004", 725);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "configuration.proto", &protobuf_RegisterTypes);
+  ConfigurationProto::_default_file_list_ =
+      new ::std::string("train.txt", 9);
   ConfigurationProto::default_instance_ = new ConfigurationProto();
   StateProto::default_instance_ = new StateProto();
   PointProto::default_instance_ = new PointProto();
@@ -252,6 +259,7 @@ struct StaticDescriptorInitializer_configuration_2eproto {
 
 // ===================================================================
 
+::std::string* ConfigurationProto::_default_file_list_ = NULL;
 #ifndef _MSC_VER
 const int ConfigurationProto::kMaxDepthFieldNumber;
 const int ConfigurationProto::kNumTreesFieldNumber;
@@ -263,6 +271,8 @@ const int ConfigurationProto::kContextPatchFieldNumber;
 const int ConfigurationProto::kDimFeaturesFieldNumber;
 const int ConfigurationProto::kNumKeypointsFieldNumber;
 const int ConfigurationProto::kNumClassesFieldNumber;
+const int ConfigurationProto::kFileListFieldNumber;
+const int ConfigurationProto::kPathFieldNumber;
 #endif  // !_MSC_VER
 
 ConfigurationProto::ConfigurationProto()
@@ -282,6 +292,7 @@ ConfigurationProto::ConfigurationProto(const ConfigurationProto& from)
 }
 
 void ConfigurationProto::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   max_depth_ = 5;
   num_trees_ = 3;
@@ -293,6 +304,8 @@ void ConfigurationProto::SharedCtor() {
   dim_features_ = 100;
   num_keypoints_ = 10;
   num_classes_ = 2;
+  file_list_ = const_cast< ::std::string*>(_default_file_list_);
+  path_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -302,6 +315,12 @@ ConfigurationProto::~ConfigurationProto() {
 }
 
 void ConfigurationProto::SharedDtor() {
+  if (file_list_ != _default_file_list_) {
+    delete file_list_;
+  }
+  if (path_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete path_;
+  }
   if (this != default_instance_) {
   }
 }
@@ -338,9 +357,19 @@ void ConfigurationProto::Clear() {
     context_patch_ = 50;
     dim_features_ = 100;
   }
-  if (_has_bits_[8 / 32] & 768) {
+  if (_has_bits_[8 / 32] & 3840) {
     num_keypoints_ = 10;
     num_classes_ = 2;
+    if (has_file_list()) {
+      if (file_list_ != _default_file_list_) {
+        file_list_->assign(*_default_file_list_);
+      }
+    }
+    if (has_path()) {
+      if (path_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        path_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -501,6 +530,40 @@ bool ConfigurationProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(90)) goto parse_file_list;
+        break;
+      }
+
+      // required string file_list = 11 [default = "train.txt"];
+      case 11: {
+        if (tag == 90) {
+         parse_file_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_file_list()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->file_list().data(), this->file_list().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "file_list");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(98)) goto parse_path;
+        break;
+      }
+
+      // required string path = 12 [default = ""];
+      case 12: {
+        if (tag == 98) {
+         parse_path:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_path()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->path().data(), this->path().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "path");
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -580,6 +643,26 @@ void ConfigurationProto::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(10, this->num_classes(), output);
   }
 
+  // required string file_list = 11 [default = "train.txt"];
+  if (has_file_list()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->file_list().data(), this->file_list().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "file_list");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      11, this->file_list(), output);
+  }
+
+  // required string path = 12 [default = ""];
+  if (has_path()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->path().data(), this->path().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "path");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      12, this->path(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -638,6 +721,28 @@ void ConfigurationProto::SerializeWithCachedSizes(
   // required int32 num_classes = 10 [default = 2];
   if (has_num_classes()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(10, this->num_classes(), target);
+  }
+
+  // required string file_list = 11 [default = "train.txt"];
+  if (has_file_list()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->file_list().data(), this->file_list().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "file_list");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        11, this->file_list(), target);
+  }
+
+  // required string path = 12 [default = ""];
+  if (has_path()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->path().data(), this->path().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "path");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        12, this->path(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -722,6 +827,20 @@ int ConfigurationProto::ByteSize() const {
           this->num_classes());
     }
 
+    // required string file_list = 11 [default = "train.txt"];
+    if (has_file_list()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->file_list());
+    }
+
+    // required string path = 12 [default = ""];
+    if (has_path()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->path());
+    }
+
   }
   if (!unknown_fields().empty()) {
     total_size +=
@@ -781,6 +900,12 @@ void ConfigurationProto::MergeFrom(const ConfigurationProto& from) {
     if (from.has_num_classes()) {
       set_num_classes(from.num_classes());
     }
+    if (from.has_file_list()) {
+      set_file_list(from.file_list());
+    }
+    if (from.has_path()) {
+      set_path(from.path());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -798,7 +923,7 @@ void ConfigurationProto::CopyFrom(const ConfigurationProto& from) {
 }
 
 bool ConfigurationProto::IsInitialized() const {
-  if ((_has_bits_[0] & 0x000003ff) != 0x000003ff) return false;
+  if ((_has_bits_[0] & 0x00000fff) != 0x00000fff) return false;
 
   return true;
 }
@@ -815,6 +940,8 @@ void ConfigurationProto::Swap(ConfigurationProto* other) {
     std::swap(dim_features_, other->dim_features_);
     std::swap(num_keypoints_, other->num_keypoints_);
     std::swap(num_classes_, other->num_classes_);
+    std::swap(file_list_, other->file_list_);
+    std::swap(path_, other->path_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

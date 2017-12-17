@@ -165,6 +165,30 @@ class ConfigurationProto : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 num_classes() const;
   inline void set_num_classes(::google::protobuf::int32 value);
 
+  // required string file_list = 11 [default = "train.txt"];
+  inline bool has_file_list() const;
+  inline void clear_file_list();
+  static const int kFileListFieldNumber = 11;
+  inline const ::std::string& file_list() const;
+  inline void set_file_list(const ::std::string& value);
+  inline void set_file_list(const char* value);
+  inline void set_file_list(const char* value, size_t size);
+  inline ::std::string* mutable_file_list();
+  inline ::std::string* release_file_list();
+  inline void set_allocated_file_list(::std::string* file_list);
+
+  // required string path = 12 [default = ""];
+  inline bool has_path() const;
+  inline void clear_path();
+  static const int kPathFieldNumber = 12;
+  inline const ::std::string& path() const;
+  inline void set_path(const ::std::string& value);
+  inline void set_path(const char* value);
+  inline void set_path(const char* value, size_t size);
+  inline ::std::string* mutable_path();
+  inline ::std::string* release_path();
+  inline void set_allocated_path(::std::string* path);
+
   // @@protoc_insertion_point(class_scope:Beta.ConfigurationProto)
  private:
   inline void set_has_max_depth();
@@ -187,6 +211,10 @@ class ConfigurationProto : public ::google::protobuf::Message {
   inline void clear_has_num_keypoints();
   inline void set_has_num_classes();
   inline void clear_has_num_classes();
+  inline void set_has_file_list();
+  inline void clear_has_file_list();
+  inline void set_has_path();
+  inline void clear_has_path();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -202,6 +230,9 @@ class ConfigurationProto : public ::google::protobuf::Message {
   ::google::protobuf::int32 dim_features_;
   ::google::protobuf::int32 num_keypoints_;
   ::google::protobuf::int32 num_classes_;
+  static ::std::string* _default_file_list_;
+  ::std::string* file_list_;
+  ::std::string* path_;
   friend void  protobuf_AddDesc_configuration_2eproto();
   friend void protobuf_AssignDesc_configuration_2eproto();
   friend void protobuf_ShutdownFile_configuration_2eproto();
@@ -983,6 +1014,158 @@ inline void ConfigurationProto::set_num_classes(::google::protobuf::int32 value)
   set_has_num_classes();
   num_classes_ = value;
   // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.num_classes)
+}
+
+// required string file_list = 11 [default = "train.txt"];
+inline bool ConfigurationProto::has_file_list() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+inline void ConfigurationProto::set_has_file_list() {
+  _has_bits_[0] |= 0x00000400u;
+}
+inline void ConfigurationProto::clear_has_file_list() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+inline void ConfigurationProto::clear_file_list() {
+  if (file_list_ != _default_file_list_) {
+    file_list_->assign(*_default_file_list_);
+  }
+  clear_has_file_list();
+}
+inline const ::std::string& ConfigurationProto::file_list() const {
+  // @@protoc_insertion_point(field_get:Beta.ConfigurationProto.file_list)
+  return *file_list_;
+}
+inline void ConfigurationProto::set_file_list(const ::std::string& value) {
+  set_has_file_list();
+  if (file_list_ == _default_file_list_) {
+    file_list_ = new ::std::string;
+  }
+  file_list_->assign(value);
+  // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.file_list)
+}
+inline void ConfigurationProto::set_file_list(const char* value) {
+  set_has_file_list();
+  if (file_list_ == _default_file_list_) {
+    file_list_ = new ::std::string;
+  }
+  file_list_->assign(value);
+  // @@protoc_insertion_point(field_set_char:Beta.ConfigurationProto.file_list)
+}
+inline void ConfigurationProto::set_file_list(const char* value, size_t size) {
+  set_has_file_list();
+  if (file_list_ == _default_file_list_) {
+    file_list_ = new ::std::string;
+  }
+  file_list_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:Beta.ConfigurationProto.file_list)
+}
+inline ::std::string* ConfigurationProto::mutable_file_list() {
+  set_has_file_list();
+  if (file_list_ == _default_file_list_) {
+    file_list_ = new ::std::string(*_default_file_list_);
+  }
+  // @@protoc_insertion_point(field_mutable:Beta.ConfigurationProto.file_list)
+  return file_list_;
+}
+inline ::std::string* ConfigurationProto::release_file_list() {
+  clear_has_file_list();
+  if (file_list_ == _default_file_list_) {
+    return NULL;
+  } else {
+    ::std::string* temp = file_list_;
+    file_list_ = const_cast< ::std::string*>(_default_file_list_);
+    return temp;
+  }
+}
+inline void ConfigurationProto::set_allocated_file_list(::std::string* file_list) {
+  if (file_list_ != _default_file_list_) {
+    delete file_list_;
+  }
+  if (file_list) {
+    set_has_file_list();
+    file_list_ = file_list;
+  } else {
+    clear_has_file_list();
+    file_list_ = const_cast< ::std::string*>(_default_file_list_);
+  }
+  // @@protoc_insertion_point(field_set_allocated:Beta.ConfigurationProto.file_list)
+}
+
+// required string path = 12 [default = ""];
+inline bool ConfigurationProto::has_path() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void ConfigurationProto::set_has_path() {
+  _has_bits_[0] |= 0x00000800u;
+}
+inline void ConfigurationProto::clear_has_path() {
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline void ConfigurationProto::clear_path() {
+  if (path_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    path_->clear();
+  }
+  clear_has_path();
+}
+inline const ::std::string& ConfigurationProto::path() const {
+  // @@protoc_insertion_point(field_get:Beta.ConfigurationProto.path)
+  return *path_;
+}
+inline void ConfigurationProto::set_path(const ::std::string& value) {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    path_ = new ::std::string;
+  }
+  path_->assign(value);
+  // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.path)
+}
+inline void ConfigurationProto::set_path(const char* value) {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    path_ = new ::std::string;
+  }
+  path_->assign(value);
+  // @@protoc_insertion_point(field_set_char:Beta.ConfigurationProto.path)
+}
+inline void ConfigurationProto::set_path(const char* value, size_t size) {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    path_ = new ::std::string;
+  }
+  path_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:Beta.ConfigurationProto.path)
+}
+inline ::std::string* ConfigurationProto::mutable_path() {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    path_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:Beta.ConfigurationProto.path)
+  return path_;
+}
+inline ::std::string* ConfigurationProto::release_path() {
+  clear_has_path();
+  if (path_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = path_;
+    path_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void ConfigurationProto::set_allocated_path(::std::string* path) {
+  if (path_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete path_;
+  }
+  if (path) {
+    set_has_path();
+    path_ = path;
+  } else {
+    clear_has_path();
+    path_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:Beta.ConfigurationProto.path)
 }
 
 // -------------------------------------------------------------------

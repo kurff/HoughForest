@@ -14,7 +14,7 @@ target_link_libraries(test_fonts freetype opencv_highgui opencv_core opencv_imgp
 if (test)
 enable_testing()
 add_executable(test_data  test_data.cpp)
-target_link_libraries(test_data gtest gtest_main glog opencv_highgui opencv_core opencv_imgproc)
+target_link_libraries(test_data gtest gtest_main glog opencv_highgui opencv_core opencv_imgproc protobuf)
 add_test(NAME test_data COMMAND test_data)
 
 add_executable(test_selector  test_selector.cpp)

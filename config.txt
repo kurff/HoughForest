@@ -1,0 +1,14 @@
+max_depth: 10
+num_trees: 1
+mode: 1
+min_entropy: 0.001
+height: 64
+width: 64
+context_patch: 32
+dim_features: 100
+num_keypoints: 16
+num_classes: 2
+file_list: "file_list.txt"
+neg_file_list: "neg_list.txt"
+path: "/media/kurff/d45400e1-76eb-453c-a31e-9ae30fafb7fd/local_binary_regression/data/"
+

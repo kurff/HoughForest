@@ -210,44 +210,42 @@ class Tree{
 
         }
 
-        void train(Data& data){
-            Node<State>* node = new Node<State>("root");
-            node->sindex() = ++ counter_;
+        void train(Data* data){
+            Node<State>* node = new Node<State>("Node"+std::to_string(counter_));
+            node->sindex() = counter_;
             node->sdepth() = 0;
             add_node(node);
-            train_recurse(data.data_.begin(), data.data_.end(),0);
-
-
-
-
-
-
+            DLOG(INFO)<<"start training from root";
+            train_recurse(data->data_.begin(), data->data_.end(),0);
         }
 
 
-        void train_recurse(IIterator& begin, IIterator& end, int depth){
+        void train_recurse(const IIterator& begin, const IIterator& end, int depth){
             selector_->random_generation(dim_features_);
             Random random_generator;
-
+            
+            
+            DLOG(INFO)<<"random generation";
 
             float max_val = 1e10;
             float val = 0;
-            IIterator best;
+            IIterator best, it;
             Node<State>* node;
             for(int i = 0; i < dim_features_; ++ i){
-                for(IIterator it = begin; it != end; ++ it){
+                for(it = begin; it != end; ++ it){
                     it->key_ = feature_->extract(it->img_, selector_->selector(i));
                 }
+
+
                 sort(begin,end, compare);
 
-                eval_ = random_generator.NextDouble() > 0.5 ? reg_eval_ : cls_eval_;
-              
                 
-                for(IIterator it  = begin; it != end; ++ it){
+                eval_ = random_generator.NextDouble() > 0.5 ? reg_eval_ : cls_eval_;
+                for(it  = begin; it != end; ++ it){
                     val  = eval_->calculate(begin, it, end);
                     if(max_val <= val){
                         max_val = val;
-                        node = find(count);
+                        node = find(counter_);
                         node->sstate() = selector_->selector(i);
                         node->sstate().t_ = it->key_;
                         best = it;
@@ -259,12 +257,15 @@ class Tree{
             if(depth >= L_){
                 return;
             }
+
             Node<State>* node_left = new Node<State>("Node"+std::to_string(counter_+1) );
+            LOG(INFO)<< "adding Node "<<std::to_string(counter_+1);
             node_left->sdepth() = depth + 1;
             add_node(node, node_left);
             train_recurse(begin, best, depth+1);
 
             Node<State>* node_right = new Node<State>("Node"+std::to_string(counter_+1));
+            LOG(INFO)<< "adding Node "<<std::to_string(counter_+1);
             node_right->sdepth() = depth + 1;
             add_node(node, node_right);
             train_recurse(best, end, depth+1);

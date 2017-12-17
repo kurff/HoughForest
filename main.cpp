@@ -17,8 +17,17 @@ int main(int argc, char* argv[]){
 
     Tree<State>* tree = new Tree<State>(*config);
 
-    Data* data = new Data();
+    Data* data = new Data(config->configuration_.num_keypoints());
 
+    
+    data->load_data(config->configuration_.path(), config->configuration_.file_list());
+    data->load_neg(config->configuration_.path(),config->configuration_.neg_file_list())
+    
+    if(config->configuration_.mode() == 1){
+        tree->train(data);
+
+
+    }
     
 
 
