@@ -9,7 +9,7 @@ link_directories(/usr/local/lib /usr/lib)
 
 add_executable(test_fonts  test_fonts.cpp)
 
-target_link_libraries(test_fonts freetype)
+target_link_libraries(test_fonts freetype opencv_highgui opencv_core opencv_imgproc)
 
 if (test)
 enable_testing()
