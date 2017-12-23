@@ -30,9 +30,9 @@ namespace Beta{
                 cls_statistic_ = new float [dim_] ;
             }
             ~ClsStatistic(){
-                if(cls_statistic_ != nullptr){
-                    delete [] cls_statistic_;
-                }
+                //if(cls_statistic_ != nullptr){
+                //    delete [] cls_statistic_;
+                //}
             }
 
             const int & dim(){return dim_;}
@@ -60,9 +60,9 @@ namespace Beta{
             }
 
             ~RegStatistic(){
-                if(reg_statistic_ != nullptr){
-                    delete [] reg_statistic_;
-                }
+               // if(reg_statistic_ != nullptr){
+               //     delete [] reg_statistic_;
+              //  }
 
             }
 

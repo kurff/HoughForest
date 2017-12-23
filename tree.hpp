@@ -48,6 +48,11 @@ class Node{
 
         unsigned long & sindex(){return index_;}
         map<unsigned long, Node<State>* >& schild(){return child_;}
+
+        void insert(pair<unsigned long, Node<State>* > elements){
+            child_.insert(elements);
+        }
+
         Node<State>* & sparent(){return parent_;}
         bool & sflag(){return flag_;}
         State & sstate(){return state_;}
@@ -67,6 +72,10 @@ class Node{
         const bool flag(){return flag_;}
         const int& type(){return type_;}
 
+        void print_state(){
+            LOG(INFO)<<"x0: "<<state_.x0_ <<" y0: "<<state_.y0_<<" x1: "<<state_.x1_<<" y1: "<<state_.y1_<<" xc: "<<state_.xc_<<" yc: "<<state_.yc_<<" t: "<< state_.t_;
+        }
+
     
 
     protected:
@@ -84,7 +93,7 @@ class Node{
         bool flag_; // if flag_ = 1, is leaf node;
         int type_; // type = 1, regression node; type = 2, classification node; type=-1
         
-        Statistic* statistic_;
+        //Statistic* statistic_;
         //static int index;
 };
 
@@ -103,7 +112,7 @@ class Tree{
 
             reg_eval_ = shared_ptr<Evaluation> (new RegressionEvaluation(config));
             cls_eval_ = shared_ptr<Evaluation> (new ClassificationEvaluation(config));
-
+            minimum_samples_ = config.configuration_.minimum_samples();
 
         }
         ~Tree(){
@@ -115,11 +124,12 @@ class Tree{
 
             DLOG(INFO)<< "adding "<< counter_<<" node";
             node->sindex() = ++ counter_;
-            nodes_[counter_] = node;
-            leaf_node->schild().insert(std::pair<unsigned long, Node<State>* >(counter_,node));
+            //nodes_[counter_] = node;
+            nodes_.insert(std::pair<unsigned long, Node<State>* >(counter_,node));
+            leaf_node->insert(std::pair<unsigned long, Node<State>* >(counter_,node));
             node->sparent()=leaf_node;
 
-            
+            LOG(INFO)<<"adding finish";
             
             //tree_.push_back(node);
             //leaf_node->child_ = node;
@@ -221,6 +231,17 @@ class Tree{
 
 
         void train_recurse(const IIterator& begin, const IIterator& end, int depth){
+            IIterator best, it;
+            int number_samples = 0;
+            for(it = begin; it != end; ++it){
+                ++ number_samples;
+            }
+
+            if(depth >= L_ || number_samples < minimum_samples_){
+                LOG(INFO)<<"return with depth: " << depth <<" number_samples: "<< number_samples; 
+                return;
+            }
+
             selector_->random_generation(dim_features_);
             Random random_generator;
             
@@ -229,13 +250,17 @@ class Tree{
 
             float max_val = 1e10;
             float val = 0;
-            IIterator best, it;
-            Node<State>* node;
+
+            Node<State>* node  = find(counter_);
+
+
             for(int i = 0; i < dim_features_; ++ i){
                 for(it = begin; it != end; ++ it){
-                    it->key_ = feature_->extract(it->img_, selector_->selector(i));
+                    it->key_= feature_->extract(it->img_, selector_->selector(i));
+                    //std::cout<< it->key_<<" ";
                 }
 
+                LOG(INFO)<< "sort" << i ;
 
                 sort(begin,end, compare);
 
@@ -243,9 +268,9 @@ class Tree{
                 eval_ = random_generator.NextDouble() > 0.5 ? reg_eval_ : cls_eval_;
                 for(it  = begin; it != end; ++ it){
                     val  = eval_->calculate(begin, it, end);
-                    if(max_val <= val){
+                    //val = 0;
+                    if(max_val >= val){
                         max_val = val;
-                        node = find(counter_);
                         node->sstate() = selector_->selector(i);
                         node->sstate().t_ = it->key_;
                         best = it;
@@ -253,10 +278,12 @@ class Tree{
                 }
             }
 
+            node->print_state();
 
-            if(depth >= L_){
-                return;
-            }
+
+
+
+
 
             Node<State>* node_left = new Node<State>("Node"+std::to_string(counter_+1) );
             LOG(INFO)<< "adding Node "<<std::to_string(counter_+1);
@@ -314,6 +341,7 @@ class Tree{
 
 
         int L_;
+        int minimum_samples_;
 
 };
 

@@ -7,6 +7,7 @@
 #include <fstream>
 #include "glog/logging.h"
 #include "utils/utils.hpp"
+#include "Random.h"
 // #include "feature.hpp"
 // #include "configure.hpp"
 // #include "selector.hpp"
@@ -82,42 +83,65 @@ class Data{
 
 
         void load_data(string path, string file){
+            LOG(INFO)<<"read positive training file"<< path << file ;
             ifstream fin(file, ios::in);
             string content;
             data_.clear();
             while(fin >> content){
                 Image image;
-                image.img_ = imread(path+"/images/"+content+".png");
+                image.img_ = imread(path+"/images/"+content+".png",1);
+                if(image.img_.channels() !=3){
+                    LOG(INFO)<<"error";
+                }
                 load_keypoints(path+"/keypoints/"+content+".txt",image.keypoints_);
                 image.name_ = content;
                 vector<string> contents;
                 SplitString(content,contents,"_");
-                image.label_ = characters_.find(contents[0]);
+                //image.label_ = characters_.find(contents[0]);
+                image.label_ = 1;
                 data_.push_back(image);
             }
-            LOG(INFO)<< "load "<< data_.size()<< " data"; 
+            LOG(INFO)<< "Final load "<< data_.size()<< " data"; 
             fin.close();
             
         }
 
+
+        Mat random_patch(Mat & image){
+            Random ran;
+            int height = image.rows;
+            int width = image.cols;
+            int y0 = ran.Next(0, height - height_);
+            int x0 = ran.Next(0, width - width_);
+            //LOG(INFO)<<height <<" "<< width <<" "<< y0<<" "<<x0<<"height "<< height_ <<"width "<< width_;
+            Rect rect(x0,y0, width_, height_);
+            return image(rect);
+        }
+
         void load_neg(string path, string file){
+            LOG(INFO)<<"load negtive file";
+            LOG(INFO)<< path;
+            LOG(INFO)<< file;
             ifstream fin(file, ios::in);
             string content;
             while(fin >> content){
                 Image image;
-                image.img_ = imread(path+"/neg/"+content+".png");
+                Mat img = imread(path+"/neg/"+content+".jpg",1);
+                if(img.channels() !=3){
+                    LOG(INFO)<<"error";
+                }
+                if(img.empty()){
+                    LOG(INFO)<<"can not read image"<< (path+"/neg/"+content+".jpg");
+                }
+                Mat subimg = random_patch(img);
+                subimg.copyTo(image.img_);
                 load_neg_keypoints(image.keypoints_);
-                
                 image.name_=content;
-                image.label_ = -1;
+                image.label_ = 0;
                 data_.push_back(image);
-
-
             }
-
-
             fin.close();
-
+            LOG(INFO)<<"load negative" << data_.size();
 
         }
 

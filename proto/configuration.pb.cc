@@ -49,7 +49,7 @@ void protobuf_AssignDesc_configuration_2eproto() {
       "configuration.proto");
   GOOGLE_CHECK(file != NULL);
   ConfigurationProto_descriptor_ = file->message_type(0);
-  static const int ConfigurationProto_offsets_[12] = {
+  static const int ConfigurationProto_offsets_[14] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, max_depth_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, num_trees_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, mode_),
@@ -62,6 +62,8 @@ void protobuf_AssignDesc_configuration_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, num_classes_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, file_list_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, path_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, neg_file_list_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, minimum_samples_),
   };
   ConfigurationProto_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -212,25 +214,26 @@ void protobuf_AddDesc_configuration_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023configuration.proto\022\004Beta\"\254\002\n\022Configur"
+    "\n\023configuration.proto\022\004Beta\"\340\002\n\022Configur"
     "ationProto\022\024\n\tmax_depth\030\001 \002(\005:\0015\022\024\n\tnum_"
     "trees\030\002 \002(\005:\0013\022\017\n\004mode\030\003 \002(\005:\0012\022\031\n\013min_e"
-    "ntropy\030\004 \002(\002:\0040.01\022\023\n\006height\030\005 \002(\005:\003100\022"
-    "\022\n\005width\030\006 \002(\005:\003100\022\031\n\rcontext_patch\030\007 \002"
-    "(\005:\00250\022\031\n\014dim_features\030\010 \002(\005:\003100\022\031\n\rnum"
-    "_keypoints\030\t \002(\005:\00210\022\026\n\013num_classes\030\n \002("
-    "\005:\0012\022\034\n\tfile_list\030\013 \002(\t:\ttrain.txt\022\016\n\004pa"
-    "th\030\014 \002(\t:\000\"t\n\nStateProto\022\r\n\002x0\030\001 \002(\005:\0010\022"
-    "\r\n\002y0\030\002 \002(\005:\0010\022\r\n\002x1\030\003 \002(\005:\0010\022\r\n\002y1\030\004 \002("
-    "\005:\0010\022\014\n\001t\030\005 \002(\002:\0010\022\r\n\002xc\030\006 \002(\005:\0010\022\r\n\002yc\030"
-    "\007 \002(\005:\0010\"\"\n\nPointProto\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002"
-    " \002(\002\"P\n\016StatisticProto\022\025\n\rcls_statistic\030"
-    "\001 \003(\002\022\'\n\rreg_statistic\030\002 \003(\0132\020.Beta.Poin"
-    "tProto\"_\n\tNodeProto\022\037\n\005state\030\001 \002(\0132\020.Bet"
-    "a.StateProto\022\020\n\005depth\030\002 \002(\005:\0010\022\020\n\005index\030"
-    "\003 \002(\004:\0011\022\r\n\005child\030\004 \003(\005\"<\n\tTreeProto\022\036\n\005"
-    "nodes\030\001 \003(\0132\017.Beta.NodeProto\022\017\n\007counter\030"
-    "\002 \002(\004", 725);
+    "ntropy\030\004 \002(\002:\0040.01\022\022\n\006height\030\005 \002(\005:\00264\022\021"
+    "\n\005width\030\006 \002(\005:\00264\022\031\n\rcontext_patch\030\007 \002(\005"
+    ":\00250\022\031\n\014dim_features\030\010 \002(\005:\003100\022\031\n\rnum_k"
+    "eypoints\030\t \002(\005:\00210\022\026\n\013num_classes\030\n \002(\005:"
+    "\0012\022\034\n\tfile_list\030\013 \002(\t:\ttrain.txt\022\016\n\004path"
+    "\030\014 \002(\t:\000\022\027\n\rneg_file_list\030\r \002(\t:\000\022\033\n\017min"
+    "imum_samples\030\016 \002(\005:\00210\"t\n\nStateProto\022\r\n\002"
+    "x0\030\001 \002(\005:\0010\022\r\n\002y0\030\002 \002(\005:\0010\022\r\n\002x1\030\003 \002(\005:\001"
+    "0\022\r\n\002y1\030\004 \002(\005:\0010\022\014\n\001t\030\005 \002(\002:\0010\022\r\n\002xc\030\006 \002"
+    "(\005:\0010\022\r\n\002yc\030\007 \002(\005:\0010\"\"\n\nPointProto\022\t\n\001x\030"
+    "\001 \002(\002\022\t\n\001y\030\002 \002(\002\"P\n\016StatisticProto\022\025\n\rcl"
+    "s_statistic\030\001 \003(\002\022\'\n\rreg_statistic\030\002 \003(\013"
+    "2\020.Beta.PointProto\"_\n\tNodeProto\022\037\n\005state"
+    "\030\001 \002(\0132\020.Beta.StateProto\022\020\n\005depth\030\002 \002(\005:"
+    "\0010\022\020\n\005index\030\003 \002(\004:\0011\022\r\n\005child\030\004 \003(\005\"<\n\tT"
+    "reeProto\022\036\n\005nodes\030\001 \003(\0132\017.Beta.NodeProto"
+    "\022\017\n\007counter\030\002 \002(\004", 777);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "configuration.proto", &protobuf_RegisterTypes);
   ConfigurationProto::_default_file_list_ =
@@ -273,6 +276,8 @@ const int ConfigurationProto::kNumKeypointsFieldNumber;
 const int ConfigurationProto::kNumClassesFieldNumber;
 const int ConfigurationProto::kFileListFieldNumber;
 const int ConfigurationProto::kPathFieldNumber;
+const int ConfigurationProto::kNegFileListFieldNumber;
+const int ConfigurationProto::kMinimumSamplesFieldNumber;
 #endif  // !_MSC_VER
 
 ConfigurationProto::ConfigurationProto()
@@ -298,14 +303,16 @@ void ConfigurationProto::SharedCtor() {
   num_trees_ = 3;
   mode_ = 2;
   min_entropy_ = 0.01f;
-  height_ = 100;
-  width_ = 100;
+  height_ = 64;
+  width_ = 64;
   context_patch_ = 50;
   dim_features_ = 100;
   num_keypoints_ = 10;
   num_classes_ = 2;
   file_list_ = const_cast< ::std::string*>(_default_file_list_);
   path_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  neg_file_list_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  minimum_samples_ = 10;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -320,6 +327,9 @@ void ConfigurationProto::SharedDtor() {
   }
   if (path_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete path_;
+  }
+  if (neg_file_list_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete neg_file_list_;
   }
   if (this != default_instance_) {
   }
@@ -352,12 +362,12 @@ void ConfigurationProto::Clear() {
     num_trees_ = 3;
     mode_ = 2;
     min_entropy_ = 0.01f;
-    height_ = 100;
-    width_ = 100;
+    height_ = 64;
+    width_ = 64;
     context_patch_ = 50;
     dim_features_ = 100;
   }
-  if (_has_bits_[8 / 32] & 3840) {
+  if (_has_bits_[8 / 32] & 16128) {
     num_keypoints_ = 10;
     num_classes_ = 2;
     if (has_file_list()) {
@@ -370,6 +380,12 @@ void ConfigurationProto::Clear() {
         path_->clear();
       }
     }
+    if (has_neg_file_list()) {
+      if (neg_file_list_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        neg_file_list_->clear();
+      }
+    }
+    minimum_samples_ = 10;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -444,7 +460,7 @@ bool ConfigurationProto::MergePartialFromCodedStream(
         break;
       }
 
-      // required int32 height = 5 [default = 100];
+      // required int32 height = 5 [default = 64];
       case 5: {
         if (tag == 40) {
          parse_height:
@@ -459,7 +475,7 @@ bool ConfigurationProto::MergePartialFromCodedStream(
         break;
       }
 
-      // required int32 width = 6 [default = 100];
+      // required int32 width = 6 [default = 64];
       case 6: {
         if (tag == 48) {
          parse_width:
@@ -564,6 +580,38 @@ bool ConfigurationProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(106)) goto parse_neg_file_list;
+        break;
+      }
+
+      // required string neg_file_list = 13 [default = ""];
+      case 13: {
+        if (tag == 106) {
+         parse_neg_file_list:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_neg_file_list()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->neg_file_list().data(), this->neg_file_list().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "neg_file_list");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(112)) goto parse_minimum_samples;
+        break;
+      }
+
+      // required int32 minimum_samples = 14 [default = 10];
+      case 14: {
+        if (tag == 112) {
+         parse_minimum_samples:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &minimum_samples_)));
+          set_has_minimum_samples();
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -613,12 +661,12 @@ void ConfigurationProto::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->min_entropy(), output);
   }
 
-  // required int32 height = 5 [default = 100];
+  // required int32 height = 5 [default = 64];
   if (has_height()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->height(), output);
   }
 
-  // required int32 width = 6 [default = 100];
+  // required int32 width = 6 [default = 64];
   if (has_width()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->width(), output);
   }
@@ -663,6 +711,21 @@ void ConfigurationProto::SerializeWithCachedSizes(
       12, this->path(), output);
   }
 
+  // required string neg_file_list = 13 [default = ""];
+  if (has_neg_file_list()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->neg_file_list().data(), this->neg_file_list().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "neg_file_list");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      13, this->neg_file_list(), output);
+  }
+
+  // required int32 minimum_samples = 14 [default = 10];
+  if (has_minimum_samples()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(14, this->minimum_samples(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -693,12 +756,12 @@ void ConfigurationProto::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->min_entropy(), target);
   }
 
-  // required int32 height = 5 [default = 100];
+  // required int32 height = 5 [default = 64];
   if (has_height()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->height(), target);
   }
 
-  // required int32 width = 6 [default = 100];
+  // required int32 width = 6 [default = 64];
   if (has_width()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->width(), target);
   }
@@ -745,6 +808,22 @@ void ConfigurationProto::SerializeWithCachedSizes(
         12, this->path(), target);
   }
 
+  // required string neg_file_list = 13 [default = ""];
+  if (has_neg_file_list()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->neg_file_list().data(), this->neg_file_list().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "neg_file_list");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        13, this->neg_file_list(), target);
+  }
+
+  // required int32 minimum_samples = 14 [default = 10];
+  if (has_minimum_samples()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(14, this->minimum_samples(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -783,14 +862,14 @@ int ConfigurationProto::ByteSize() const {
       total_size += 1 + 4;
     }
 
-    // required int32 height = 5 [default = 100];
+    // required int32 height = 5 [default = 64];
     if (has_height()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->height());
     }
 
-    // required int32 width = 6 [default = 100];
+    // required int32 width = 6 [default = 64];
     if (has_width()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -839,6 +918,20 @@ int ConfigurationProto::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->path());
+    }
+
+    // required string neg_file_list = 13 [default = ""];
+    if (has_neg_file_list()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->neg_file_list());
+    }
+
+    // required int32 minimum_samples = 14 [default = 10];
+    if (has_minimum_samples()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->minimum_samples());
     }
 
   }
@@ -906,6 +999,12 @@ void ConfigurationProto::MergeFrom(const ConfigurationProto& from) {
     if (from.has_path()) {
       set_path(from.path());
     }
+    if (from.has_neg_file_list()) {
+      set_neg_file_list(from.neg_file_list());
+    }
+    if (from.has_minimum_samples()) {
+      set_minimum_samples(from.minimum_samples());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -923,7 +1022,7 @@ void ConfigurationProto::CopyFrom(const ConfigurationProto& from) {
 }
 
 bool ConfigurationProto::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000fff) != 0x00000fff) return false;
+  if ((_has_bits_[0] & 0x00003fff) != 0x00003fff) return false;
 
   return true;
 }
@@ -942,6 +1041,8 @@ void ConfigurationProto::Swap(ConfigurationProto* other) {
     std::swap(num_classes_, other->num_classes_);
     std::swap(file_list_, other->file_list_);
     std::swap(path_, other->path_);
+    std::swap(neg_file_list_, other->neg_file_list_);
+    std::swap(minimum_samples_, other->minimum_samples_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

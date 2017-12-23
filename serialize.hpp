@@ -59,7 +59,6 @@ namespace Beta{
             template<typename State>
             void deserialize(string file, Tree<State>* tree){
                 read_txt(tree_proto_.get(), file);
-
             }
 
             template<typename State>

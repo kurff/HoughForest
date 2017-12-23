@@ -12,6 +12,16 @@ namespace Beta{
 
             }
 
+            State(const State& state){
+                x0_ = state.x0_;
+                y0_ = state.y0_;
+                x1_ = state.x1_;
+                y1_ = state.y1_;
+                t_ = state.t_;
+                xc_ = state.xc_;
+                yc_ = state.yc_;
+            }
+
         public:
             int x0_;
             int y0_;

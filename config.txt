@@ -5,7 +5,7 @@ min_entropy: 0.001
 height: 64
 width: 64
 context_patch: 32
-dim_features: 100
+dim_features: 10
 num_keypoints: 16
 num_classes: 2
 file_list: "file_list.txt"

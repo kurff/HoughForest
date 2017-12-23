@@ -19,18 +19,22 @@ class Feature{
             int width = config_.configuration_.width();
             
             int height = config_.configuration_.height();
-            x0 = x0 <0? x0 + width: x0;
-            x0 = x0 >= width? x0 -width:x0;
+            x0 = (x0 <0? x0 + width: x0);
+            x0 = (x0 >= width? x0 -width:x0);
 
-            x1 = x1 <0? x1 + width: x1;
-            x1 = x1 >= width? x1 -width:x1;
+            x1 = (x1 <0? x1 + width: x1);
+            x1 = (x1 >= width? x1 -width:x1);
 
-            y0 = y0 <0? y0 + height: y0;
-            y0 = y0 >= height? y0 -height:y0;
+            y0 = (y0 <0? y0 + height: y0);
+            y0 = (y0 >= height? y0 -height:y0);
 
-            y1 = y1 <0? y1 + height: y1;
-            y1 = y1 >= height? y1 -height:y1;
+            y1 = (y1 <0? y1 + height: y1);
+            y1 = (y1 >= height? y1 -height:y1);
 
+            assert(x0>=0 && x0< width);
+            assert(y0>=0 && y0 < height);
+            assert(x1>=0 || x1 < width);
+            assert(y1>=0 || y1 < height);
              
             Vec3b v1 = image.at<Vec3b>(y1,x1);
             Vec3b v0 = image.at<Vec3b>(y0,x0);

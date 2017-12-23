@@ -27,10 +27,17 @@ namespace Beta{
                 FileInputStream* input = new FileInputStream(fd);
                 bool success = google::protobuf::TextFormat::Parse(input, (Message*)(&configuration_));
                 delete input;
-                LOG(INFO)<<"max_depth "<< configuration_.max_depth();
-                LOG(INFO)<<"num_trees " << configuration_.num_trees();
-                LOG(INFO)<<"mode " << configuration_.mode();
-                LOG(INFO)<<"min_entropy " << configuration_.min_entropy();
+
+                LOG(INFO)<<"height"<<configuration_.height();
+                LOG(INFO)<<"width" << configuration_.width();
+
+
+
+
+
+
+
+
                 close(fd);
             }
 

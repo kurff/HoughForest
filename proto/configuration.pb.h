@@ -123,14 +123,14 @@ class ConfigurationProto : public ::google::protobuf::Message {
   inline float min_entropy() const;
   inline void set_min_entropy(float value);
 
-  // required int32 height = 5 [default = 100];
+  // required int32 height = 5 [default = 64];
   inline bool has_height() const;
   inline void clear_height();
   static const int kHeightFieldNumber = 5;
   inline ::google::protobuf::int32 height() const;
   inline void set_height(::google::protobuf::int32 value);
 
-  // required int32 width = 6 [default = 100];
+  // required int32 width = 6 [default = 64];
   inline bool has_width() const;
   inline void clear_width();
   static const int kWidthFieldNumber = 6;
@@ -189,6 +189,25 @@ class ConfigurationProto : public ::google::protobuf::Message {
   inline ::std::string* release_path();
   inline void set_allocated_path(::std::string* path);
 
+  // required string neg_file_list = 13 [default = ""];
+  inline bool has_neg_file_list() const;
+  inline void clear_neg_file_list();
+  static const int kNegFileListFieldNumber = 13;
+  inline const ::std::string& neg_file_list() const;
+  inline void set_neg_file_list(const ::std::string& value);
+  inline void set_neg_file_list(const char* value);
+  inline void set_neg_file_list(const char* value, size_t size);
+  inline ::std::string* mutable_neg_file_list();
+  inline ::std::string* release_neg_file_list();
+  inline void set_allocated_neg_file_list(::std::string* neg_file_list);
+
+  // required int32 minimum_samples = 14 [default = 10];
+  inline bool has_minimum_samples() const;
+  inline void clear_minimum_samples();
+  static const int kMinimumSamplesFieldNumber = 14;
+  inline ::google::protobuf::int32 minimum_samples() const;
+  inline void set_minimum_samples(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:Beta.ConfigurationProto)
  private:
   inline void set_has_max_depth();
@@ -215,6 +234,10 @@ class ConfigurationProto : public ::google::protobuf::Message {
   inline void clear_has_file_list();
   inline void set_has_path();
   inline void clear_has_path();
+  inline void set_has_neg_file_list();
+  inline void clear_has_neg_file_list();
+  inline void set_has_minimum_samples();
+  inline void clear_has_minimum_samples();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -233,6 +256,8 @@ class ConfigurationProto : public ::google::protobuf::Message {
   static ::std::string* _default_file_list_;
   ::std::string* file_list_;
   ::std::string* path_;
+  ::std::string* neg_file_list_;
+  ::google::protobuf::int32 minimum_samples_;
   friend void  protobuf_AddDesc_configuration_2eproto();
   friend void protobuf_AssignDesc_configuration_2eproto();
   friend void protobuf_ShutdownFile_configuration_2eproto();
@@ -872,7 +897,7 @@ inline void ConfigurationProto::set_min_entropy(float value) {
   // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.min_entropy)
 }
 
-// required int32 height = 5 [default = 100];
+// required int32 height = 5 [default = 64];
 inline bool ConfigurationProto::has_height() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -883,7 +908,7 @@ inline void ConfigurationProto::clear_has_height() {
   _has_bits_[0] &= ~0x00000010u;
 }
 inline void ConfigurationProto::clear_height() {
-  height_ = 100;
+  height_ = 64;
   clear_has_height();
 }
 inline ::google::protobuf::int32 ConfigurationProto::height() const {
@@ -896,7 +921,7 @@ inline void ConfigurationProto::set_height(::google::protobuf::int32 value) {
   // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.height)
 }
 
-// required int32 width = 6 [default = 100];
+// required int32 width = 6 [default = 64];
 inline bool ConfigurationProto::has_width() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
@@ -907,7 +932,7 @@ inline void ConfigurationProto::clear_has_width() {
   _has_bits_[0] &= ~0x00000020u;
 }
 inline void ConfigurationProto::clear_width() {
-  width_ = 100;
+  width_ = 64;
   clear_has_width();
 }
 inline ::google::protobuf::int32 ConfigurationProto::width() const {
@@ -1166,6 +1191,106 @@ inline void ConfigurationProto::set_allocated_path(::std::string* path) {
     path_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
   // @@protoc_insertion_point(field_set_allocated:Beta.ConfigurationProto.path)
+}
+
+// required string neg_file_list = 13 [default = ""];
+inline bool ConfigurationProto::has_neg_file_list() const {
+  return (_has_bits_[0] & 0x00001000u) != 0;
+}
+inline void ConfigurationProto::set_has_neg_file_list() {
+  _has_bits_[0] |= 0x00001000u;
+}
+inline void ConfigurationProto::clear_has_neg_file_list() {
+  _has_bits_[0] &= ~0x00001000u;
+}
+inline void ConfigurationProto::clear_neg_file_list() {
+  if (neg_file_list_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    neg_file_list_->clear();
+  }
+  clear_has_neg_file_list();
+}
+inline const ::std::string& ConfigurationProto::neg_file_list() const {
+  // @@protoc_insertion_point(field_get:Beta.ConfigurationProto.neg_file_list)
+  return *neg_file_list_;
+}
+inline void ConfigurationProto::set_neg_file_list(const ::std::string& value) {
+  set_has_neg_file_list();
+  if (neg_file_list_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    neg_file_list_ = new ::std::string;
+  }
+  neg_file_list_->assign(value);
+  // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.neg_file_list)
+}
+inline void ConfigurationProto::set_neg_file_list(const char* value) {
+  set_has_neg_file_list();
+  if (neg_file_list_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    neg_file_list_ = new ::std::string;
+  }
+  neg_file_list_->assign(value);
+  // @@protoc_insertion_point(field_set_char:Beta.ConfigurationProto.neg_file_list)
+}
+inline void ConfigurationProto::set_neg_file_list(const char* value, size_t size) {
+  set_has_neg_file_list();
+  if (neg_file_list_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    neg_file_list_ = new ::std::string;
+  }
+  neg_file_list_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:Beta.ConfigurationProto.neg_file_list)
+}
+inline ::std::string* ConfigurationProto::mutable_neg_file_list() {
+  set_has_neg_file_list();
+  if (neg_file_list_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    neg_file_list_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:Beta.ConfigurationProto.neg_file_list)
+  return neg_file_list_;
+}
+inline ::std::string* ConfigurationProto::release_neg_file_list() {
+  clear_has_neg_file_list();
+  if (neg_file_list_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = neg_file_list_;
+    neg_file_list_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void ConfigurationProto::set_allocated_neg_file_list(::std::string* neg_file_list) {
+  if (neg_file_list_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete neg_file_list_;
+  }
+  if (neg_file_list) {
+    set_has_neg_file_list();
+    neg_file_list_ = neg_file_list;
+  } else {
+    clear_has_neg_file_list();
+    neg_file_list_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:Beta.ConfigurationProto.neg_file_list)
+}
+
+// required int32 minimum_samples = 14 [default = 10];
+inline bool ConfigurationProto::has_minimum_samples() const {
+  return (_has_bits_[0] & 0x00002000u) != 0;
+}
+inline void ConfigurationProto::set_has_minimum_samples() {
+  _has_bits_[0] |= 0x00002000u;
+}
+inline void ConfigurationProto::clear_has_minimum_samples() {
+  _has_bits_[0] &= ~0x00002000u;
+}
+inline void ConfigurationProto::clear_minimum_samples() {
+  minimum_samples_ = 10;
+  clear_has_minimum_samples();
+}
+inline ::google::protobuf::int32 ConfigurationProto::minimum_samples() const {
+  // @@protoc_insertion_point(field_get:Beta.ConfigurationProto.minimum_samples)
+  return minimum_samples_;
+}
+inline void ConfigurationProto::set_minimum_samples(::google::protobuf::int32 value) {
+  set_has_minimum_samples();
+  minimum_samples_ = value;
+  // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.minimum_samples)
 }
 
 // -------------------------------------------------------------------
