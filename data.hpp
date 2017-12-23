@@ -28,6 +28,8 @@ class Image{
         int index_;
         float key_; // feature
         int label_;
+        int prediction_;
+        float confidence_;
         string name_;
         vector<Point2f> keypoints_;
         vector<Point2f> initkeypoints_;

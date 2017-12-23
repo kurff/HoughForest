@@ -208,6 +208,18 @@ class ConfigurationProto : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 minimum_samples() const;
   inline void set_minimum_samples(::google::protobuf::int32 value);
 
+  // required string save_path = 15 [default = "tree.txt"];
+  inline bool has_save_path() const;
+  inline void clear_save_path();
+  static const int kSavePathFieldNumber = 15;
+  inline const ::std::string& save_path() const;
+  inline void set_save_path(const ::std::string& value);
+  inline void set_save_path(const char* value);
+  inline void set_save_path(const char* value, size_t size);
+  inline ::std::string* mutable_save_path();
+  inline ::std::string* release_save_path();
+  inline void set_allocated_save_path(::std::string* save_path);
+
   // @@protoc_insertion_point(class_scope:Beta.ConfigurationProto)
  private:
   inline void set_has_max_depth();
@@ -238,6 +250,8 @@ class ConfigurationProto : public ::google::protobuf::Message {
   inline void clear_has_neg_file_list();
   inline void set_has_minimum_samples();
   inline void clear_has_minimum_samples();
+  inline void set_has_save_path();
+  inline void clear_has_save_path();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -257,6 +271,8 @@ class ConfigurationProto : public ::google::protobuf::Message {
   ::std::string* file_list_;
   ::std::string* path_;
   ::std::string* neg_file_list_;
+  static ::std::string* _default_save_path_;
+  ::std::string* save_path_;
   ::google::protobuf::int32 minimum_samples_;
   friend void  protobuf_AddDesc_configuration_2eproto();
   friend void protobuf_AssignDesc_configuration_2eproto();
@@ -1291,6 +1307,82 @@ inline void ConfigurationProto::set_minimum_samples(::google::protobuf::int32 va
   set_has_minimum_samples();
   minimum_samples_ = value;
   // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.minimum_samples)
+}
+
+// required string save_path = 15 [default = "tree.txt"];
+inline bool ConfigurationProto::has_save_path() const {
+  return (_has_bits_[0] & 0x00004000u) != 0;
+}
+inline void ConfigurationProto::set_has_save_path() {
+  _has_bits_[0] |= 0x00004000u;
+}
+inline void ConfigurationProto::clear_has_save_path() {
+  _has_bits_[0] &= ~0x00004000u;
+}
+inline void ConfigurationProto::clear_save_path() {
+  if (save_path_ != _default_save_path_) {
+    save_path_->assign(*_default_save_path_);
+  }
+  clear_has_save_path();
+}
+inline const ::std::string& ConfigurationProto::save_path() const {
+  // @@protoc_insertion_point(field_get:Beta.ConfigurationProto.save_path)
+  return *save_path_;
+}
+inline void ConfigurationProto::set_save_path(const ::std::string& value) {
+  set_has_save_path();
+  if (save_path_ == _default_save_path_) {
+    save_path_ = new ::std::string;
+  }
+  save_path_->assign(value);
+  // @@protoc_insertion_point(field_set:Beta.ConfigurationProto.save_path)
+}
+inline void ConfigurationProto::set_save_path(const char* value) {
+  set_has_save_path();
+  if (save_path_ == _default_save_path_) {
+    save_path_ = new ::std::string;
+  }
+  save_path_->assign(value);
+  // @@protoc_insertion_point(field_set_char:Beta.ConfigurationProto.save_path)
+}
+inline void ConfigurationProto::set_save_path(const char* value, size_t size) {
+  set_has_save_path();
+  if (save_path_ == _default_save_path_) {
+    save_path_ = new ::std::string;
+  }
+  save_path_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:Beta.ConfigurationProto.save_path)
+}
+inline ::std::string* ConfigurationProto::mutable_save_path() {
+  set_has_save_path();
+  if (save_path_ == _default_save_path_) {
+    save_path_ = new ::std::string(*_default_save_path_);
+  }
+  // @@protoc_insertion_point(field_mutable:Beta.ConfigurationProto.save_path)
+  return save_path_;
+}
+inline ::std::string* ConfigurationProto::release_save_path() {
+  clear_has_save_path();
+  if (save_path_ == _default_save_path_) {
+    return NULL;
+  } else {
+    ::std::string* temp = save_path_;
+    save_path_ = const_cast< ::std::string*>(_default_save_path_);
+    return temp;
+  }
+}
+inline void ConfigurationProto::set_allocated_save_path(::std::string* save_path) {
+  if (save_path_ != _default_save_path_) {
+    delete save_path_;
+  }
+  if (save_path) {
+    set_has_save_path();
+    save_path_ = save_path;
+  } else {
+    clear_has_save_path();
+    save_path_ = const_cast< ::std::string*>(_default_save_path_);
+  }
+  // @@protoc_insertion_point(field_set_allocated:Beta.ConfigurationProto.save_path)
 }
 
 // -------------------------------------------------------------------

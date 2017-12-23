@@ -19,6 +19,7 @@ message ConfigurationProto{
    required string path = 12 [default=""];
    required string neg_file_list = 13[default=""];
    required int32 minimum_samples = 14[default=10];
+   required string save_path = 15 [default="tree.txt"];
    
 }
 

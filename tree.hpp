@@ -15,6 +15,7 @@
 #include "selector.hpp"
 #include "data.hpp"
 #include "statistic.hpp"
+#include "serialize.hpp"
 
 #include <mutex>
 
@@ -93,7 +94,7 @@ class Node{
         bool flag_; // if flag_ = 1, is leaf node;
         int type_; // type = 1, regression node; type = 2, classification node; type=-1
         
-        //Statistic* statistic_;
+        Statistic* statistic_;
         //static int index;
 };
 
@@ -109,6 +110,8 @@ class Tree{
             int context_patch = config.configuration_.context_patch();
             selector_ = shared_ptr<Selector<State> >(new Selector<State>(- context_patch, context_patch));
             dim_features_ = config.configuration_.dim_features();
+
+
 
             reg_eval_ = shared_ptr<Evaluation> (new RegressionEvaluation(config));
             cls_eval_ = shared_ptr<Evaluation> (new ClassificationEvaluation(config));
@@ -227,7 +230,34 @@ class Tree{
             add_node(node);
             DLOG(INFO)<<"start training from root";
             train_recurse(data->data_.begin(), data->data_.end(),0);
+            
+
+
         }
+
+
+        void test(Data* data){
+
+            for(IIterator it = data->data_.begin() ; it != data.data_->end(); ++it ){
+                predict(it->img_, it->prediction_, it->confidence_);
+            }
+
+
+
+
+        }
+
+        void predict(const Mat& image, int & label , float & confidence){
+
+            
+
+
+
+
+        }
+
+
+
 
 
         void train_recurse(const IIterator& begin, const IIterator& end, int depth){
@@ -336,7 +366,6 @@ class Tree{
         shared_ptr<Evaluation> eval_;
 
 
-        
 
 
 

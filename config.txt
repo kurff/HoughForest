@@ -11,4 +11,8 @@ num_classes: 2
 file_list: "file_list.txt"
 neg_file_list: "neg_list.txt"
 path: "/media/kurff/d45400e1-76eb-453c-a31e-9ae30fafb7fd/local_binary_regression/data/"
+save_path: "tree.txt"
+
+
+
 

@@ -49,7 +49,7 @@ void protobuf_AssignDesc_configuration_2eproto() {
       "configuration.proto");
   GOOGLE_CHECK(file != NULL);
   ConfigurationProto_descriptor_ = file->message_type(0);
-  static const int ConfigurationProto_offsets_[14] = {
+  static const int ConfigurationProto_offsets_[15] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, max_depth_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, num_trees_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, mode_),
@@ -64,6 +64,7 @@ void protobuf_AssignDesc_configuration_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, path_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, neg_file_list_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, minimum_samples_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConfigurationProto, save_path_),
   };
   ConfigurationProto_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -195,6 +196,7 @@ void protobuf_ShutdownFile_configuration_2eproto() {
   delete ConfigurationProto::default_instance_;
   delete ConfigurationProto_reflection_;
   delete ConfigurationProto::_default_file_list_;
+  delete ConfigurationProto::_default_save_path_;
   delete StateProto::default_instance_;
   delete StateProto_reflection_;
   delete PointProto::default_instance_;
@@ -214,7 +216,7 @@ void protobuf_AddDesc_configuration_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023configuration.proto\022\004Beta\"\340\002\n\022Configur"
+    "\n\023configuration.proto\022\004Beta\"\375\002\n\022Configur"
     "ationProto\022\024\n\tmax_depth\030\001 \002(\005:\0015\022\024\n\tnum_"
     "trees\030\002 \002(\005:\0013\022\017\n\004mode\030\003 \002(\005:\0012\022\031\n\013min_e"
     "ntropy\030\004 \002(\002:\0040.01\022\022\n\006height\030\005 \002(\005:\00264\022\021"
@@ -223,21 +225,24 @@ void protobuf_AddDesc_configuration_2eproto() {
     "eypoints\030\t \002(\005:\00210\022\026\n\013num_classes\030\n \002(\005:"
     "\0012\022\034\n\tfile_list\030\013 \002(\t:\ttrain.txt\022\016\n\004path"
     "\030\014 \002(\t:\000\022\027\n\rneg_file_list\030\r \002(\t:\000\022\033\n\017min"
-    "imum_samples\030\016 \002(\005:\00210\"t\n\nStateProto\022\r\n\002"
-    "x0\030\001 \002(\005:\0010\022\r\n\002y0\030\002 \002(\005:\0010\022\r\n\002x1\030\003 \002(\005:\001"
-    "0\022\r\n\002y1\030\004 \002(\005:\0010\022\014\n\001t\030\005 \002(\002:\0010\022\r\n\002xc\030\006 \002"
-    "(\005:\0010\022\r\n\002yc\030\007 \002(\005:\0010\"\"\n\nPointProto\022\t\n\001x\030"
-    "\001 \002(\002\022\t\n\001y\030\002 \002(\002\"P\n\016StatisticProto\022\025\n\rcl"
-    "s_statistic\030\001 \003(\002\022\'\n\rreg_statistic\030\002 \003(\013"
-    "2\020.Beta.PointProto\"_\n\tNodeProto\022\037\n\005state"
-    "\030\001 \002(\0132\020.Beta.StateProto\022\020\n\005depth\030\002 \002(\005:"
-    "\0010\022\020\n\005index\030\003 \002(\004:\0011\022\r\n\005child\030\004 \003(\005\"<\n\tT"
-    "reeProto\022\036\n\005nodes\030\001 \003(\0132\017.Beta.NodeProto"
-    "\022\017\n\007counter\030\002 \002(\004", 777);
+    "imum_samples\030\016 \002(\005:\00210\022\033\n\tsave_path\030\017 \002("
+    "\t:\010tree.txt\"t\n\nStateProto\022\r\n\002x0\030\001 \002(\005:\0010"
+    "\022\r\n\002y0\030\002 \002(\005:\0010\022\r\n\002x1\030\003 \002(\005:\0010\022\r\n\002y1\030\004 \002"
+    "(\005:\0010\022\014\n\001t\030\005 \002(\002:\0010\022\r\n\002xc\030\006 \002(\005:\0010\022\r\n\002yc"
+    "\030\007 \002(\005:\0010\"\"\n\nPointProto\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030"
+    "\002 \002(\002\"P\n\016StatisticProto\022\025\n\rcls_statistic"
+    "\030\001 \003(\002\022\'\n\rreg_statistic\030\002 \003(\0132\020.Beta.Poi"
+    "ntProto\"_\n\tNodeProto\022\037\n\005state\030\001 \002(\0132\020.Be"
+    "ta.StateProto\022\020\n\005depth\030\002 \002(\005:\0010\022\020\n\005index"
+    "\030\003 \002(\004:\0011\022\r\n\005child\030\004 \003(\005\"<\n\tTreeProto\022\036\n"
+    "\005nodes\030\001 \003(\0132\017.Beta.NodeProto\022\017\n\007counter"
+    "\030\002 \002(\004", 806);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "configuration.proto", &protobuf_RegisterTypes);
   ConfigurationProto::_default_file_list_ =
       new ::std::string("train.txt", 9);
+  ConfigurationProto::_default_save_path_ =
+      new ::std::string("tree.txt", 8);
   ConfigurationProto::default_instance_ = new ConfigurationProto();
   StateProto::default_instance_ = new StateProto();
   PointProto::default_instance_ = new PointProto();
@@ -263,6 +268,7 @@ struct StaticDescriptorInitializer_configuration_2eproto {
 // ===================================================================
 
 ::std::string* ConfigurationProto::_default_file_list_ = NULL;
+::std::string* ConfigurationProto::_default_save_path_ = NULL;
 #ifndef _MSC_VER
 const int ConfigurationProto::kMaxDepthFieldNumber;
 const int ConfigurationProto::kNumTreesFieldNumber;
@@ -278,6 +284,7 @@ const int ConfigurationProto::kFileListFieldNumber;
 const int ConfigurationProto::kPathFieldNumber;
 const int ConfigurationProto::kNegFileListFieldNumber;
 const int ConfigurationProto::kMinimumSamplesFieldNumber;
+const int ConfigurationProto::kSavePathFieldNumber;
 #endif  // !_MSC_VER
 
 ConfigurationProto::ConfigurationProto()
@@ -313,6 +320,7 @@ void ConfigurationProto::SharedCtor() {
   path_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   neg_file_list_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   minimum_samples_ = 10;
+  save_path_ = const_cast< ::std::string*>(_default_save_path_);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -330,6 +338,9 @@ void ConfigurationProto::SharedDtor() {
   }
   if (neg_file_list_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete neg_file_list_;
+  }
+  if (save_path_ != _default_save_path_) {
+    delete save_path_;
   }
   if (this != default_instance_) {
   }
@@ -367,7 +378,7 @@ void ConfigurationProto::Clear() {
     context_patch_ = 50;
     dim_features_ = 100;
   }
-  if (_has_bits_[8 / 32] & 16128) {
+  if (_has_bits_[8 / 32] & 32512) {
     num_keypoints_ = 10;
     num_classes_ = 2;
     if (has_file_list()) {
@@ -386,6 +397,11 @@ void ConfigurationProto::Clear() {
       }
     }
     minimum_samples_ = 10;
+    if (has_save_path()) {
+      if (save_path_ != _default_save_path_) {
+        save_path_->assign(*_default_save_path_);
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -612,6 +628,23 @@ bool ConfigurationProto::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(122)) goto parse_save_path;
+        break;
+      }
+
+      // required string save_path = 15 [default = "tree.txt"];
+      case 15: {
+        if (tag == 122) {
+         parse_save_path:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_save_path()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->save_path().data(), this->save_path().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "save_path");
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -726,6 +759,16 @@ void ConfigurationProto::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(14, this->minimum_samples(), output);
   }
 
+  // required string save_path = 15 [default = "tree.txt"];
+  if (has_save_path()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->save_path().data(), this->save_path().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "save_path");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      15, this->save_path(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -822,6 +865,17 @@ void ConfigurationProto::SerializeWithCachedSizes(
   // required int32 minimum_samples = 14 [default = 10];
   if (has_minimum_samples()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(14, this->minimum_samples(), target);
+  }
+
+  // required string save_path = 15 [default = "tree.txt"];
+  if (has_save_path()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->save_path().data(), this->save_path().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "save_path");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        15, this->save_path(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -934,6 +988,13 @@ int ConfigurationProto::ByteSize() const {
           this->minimum_samples());
     }
 
+    // required string save_path = 15 [default = "tree.txt"];
+    if (has_save_path()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->save_path());
+    }
+
   }
   if (!unknown_fields().empty()) {
     total_size +=
@@ -1005,6 +1066,9 @@ void ConfigurationProto::MergeFrom(const ConfigurationProto& from) {
     if (from.has_minimum_samples()) {
       set_minimum_samples(from.minimum_samples());
     }
+    if (from.has_save_path()) {
+      set_save_path(from.save_path());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -1022,7 +1086,7 @@ void ConfigurationProto::CopyFrom(const ConfigurationProto& from) {
 }
 
 bool ConfigurationProto::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00003fff) != 0x00003fff) return false;
+  if ((_has_bits_[0] & 0x00007fff) != 0x00007fff) return false;
 
   return true;
 }
@@ -1043,6 +1107,7 @@ void ConfigurationProto::Swap(ConfigurationProto* other) {
     std::swap(path_, other->path_);
     std::swap(neg_file_list_, other->neg_file_list_);
     std::swap(minimum_samples_, other->minimum_samples_);
+    std::swap(save_path_, other->save_path_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

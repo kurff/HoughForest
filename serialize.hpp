@@ -44,6 +44,7 @@ namespace Beta{
                     node_proto->set_depth(node->depth());
                     //node_proto->set_depth(1);
                     node_proto->set_index(node->index());
+                    
                 }
                 //tree_proto->set
                 tree_proto_->set_counter(tree->counter());
@@ -59,6 +60,9 @@ namespace Beta{
             template<typename State>
             void deserialize(string file, Tree<State>* tree){
                 read_txt(tree_proto_.get(), file);
+
+                
+
             }
 
             template<typename State>
