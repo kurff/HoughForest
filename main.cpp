@@ -35,7 +35,7 @@ int main(int argc, char* argv[]){
     if(config->configuration_.mode() == 1){
         tree->train(data);
         //serialize->serialize_binary<State>(config->configuration_.save_path(), tree); 
-
+        tree->test(data);
     }
     
 

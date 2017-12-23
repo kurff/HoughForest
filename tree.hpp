@@ -59,6 +59,8 @@ class Node{
         State & sstate(){return state_;}
         int& sdepth(){return depth_;}
         int& stype(){return type_;}
+        int& sleft(){return left_;}
+        int& sright(){return right_;}
         
         const float N(){return N_;}
         const float W(){return W_;}
@@ -72,6 +74,9 @@ class Node{
         const Node<State>* parent(){return parent_;}
         const bool flag(){return flag_;}
         const int& type(){return type_;}
+        const State& state(){return state_;}
+        const int& left(){return left_;}
+        const int& right(){return right_;}
 
         void print_state(){
             LOG(INFO)<<"x0: "<<state_.x0_ <<" y0: "<<state_.y0_<<" x1: "<<state_.x1_<<" y1: "<<state_.y1_<<" xc: "<<state_.xc_<<" yc: "<<state_.yc_<<" t: "<< state_.t_;
@@ -94,6 +99,9 @@ class Node{
         bool flag_; // if flag_ = 1, is leaf node;
         int type_; // type = 1, regression node; type = 2, classification node; type=-1
         
+        int left_;
+        int right_;
+
         Statistic* statistic_;
         //static int index;
 };
@@ -241,15 +249,34 @@ class Tree{
             for(IIterator it = data->data_.begin() ; it != data.data_->end(); ++it ){
                 predict(it->img_, it->prediction_, it->confidence_);
             }
-
-
-
-
+            float correct = 0;
+            float total_samples = 0;
+            for(IIterator it = data->data_.begin() ; it != data.data_->end(); ++it ){
+                if(it->prediction_ == it->label_){
+                    ++ correct;
+                }
+                ++ total_samples;
+            }
+            LOG(INFO)<<"training accuracy: "<< correct / total_samples;
         }
 
         void predict(const Mat& image, int & label , float & confidence){
+            Node<State>* node = find(0);
+            float v = 0;
+            while(node->child().size()){
+                v =  feature_->extract(image, node->state());
+                if(v < node->state().t_){
+                    node = find(node->left());
+                }else{
+                    node = find(node->right());
+                }
+            }
 
+            //label = ;
             
+
+
+
 
 
 
@@ -317,6 +344,7 @@ class Tree{
 
             Node<State>* node_left = new Node<State>("Node"+std::to_string(counter_+1) );
             LOG(INFO)<< "adding Node "<<std::to_string(counter_+1);
+            node->sleft() = counter_+1;
             node_left->sdepth() = depth + 1;
             add_node(node, node_left);
             train_recurse(begin, best, depth+1);
@@ -324,6 +352,7 @@ class Tree{
             Node<State>* node_right = new Node<State>("Node"+std::to_string(counter_+1));
             LOG(INFO)<< "adding Node "<<std::to_string(counter_+1);
             node_right->sdepth() = depth + 1;
+            node->sright() = counter_+1;
             add_node(node, node_right);
             train_recurse(best, end, depth+1);
 
