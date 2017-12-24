@@ -10,66 +10,47 @@ namespace Beta{
     class Statistic{
         typedef typename vector<Image>::iterator IIterator;
         public:
-            Statistic(){
-
+            Statistic(int dim_reg, int dim_cls): dim_reg_(dim_reg), dim_cls_(dim_cls){
+                
+                
             }
             ~Statistic(){
 
             }
 
-            virtual const int& dim() = 0 ;
-            virtual void run(const IIterator& begin, const IIterator& end ) = 0;
-        protected:
-    };
+            const int& dim_reg(){return dim_reg_;}
+            const int& dim_cls(){return dim_cls_;}
 
-    class ClsStatistic: public Statistic{
-        typedef typename vector<Image>::iterator IIterator;
-
-        public:
-            ClsStatistic(int dim):dim_(dim){
-                cls_statistic_ = new float [dim_] ;
-            }
-            ~ClsStatistic(){
-                //if(cls_statistic_ != nullptr){
-                //    delete [] cls_statistic_;
-                //}
+            void init_cls(){
+                cls_statistic_ = new float [dim_cls_] ();
             }
 
-            const int & dim(){return dim_;}
-            void run(const IIterator& begin, const IIterator& end){
-                memset(cls_statistic_, 0 , sizeof(float)* dim_);
+            void destroy_cls(){
+                delete [] cls_statistic_;
+            }
+
+            void init_reg(){
+                reg_statistic_ = new Point2f[dim_reg_]();
+            }
+            void destroy_reg(){
+                delete [] reg_statistic_;
+            }
+
+            void run_cls(const IIterator& begin, const IIterator& end ){
+                
+                //memset(cls_statistic_, 0 , sizeof(float)* dim_);
                 int count = 0;
                 for(IIterator it =begin; it != end; ++ it, ++ count){
                     cls_statistic_[it->label_] ++;
                 }
-                for(int i = 0; i < dim_; ++ i){
+                for(int i = 0; i < dim_cls_; ++ i){
                     cls_statistic_[i] /= float(count) + 1e-6;
                 }
-            }
-        protected:
-            float* cls_statistic_;
-            int dim_;
-    };
-
-    class RegStatistic: public Statistic{
-        typedef typename vector<Image>::iterator IIterator;
-        public:
-            RegStatistic(int dim):dim_(dim){
-                reg_statistic_ = new Point2f[dim_]();
 
             }
-
-            ~RegStatistic(){
-               // if(reg_statistic_ != nullptr){
-               //     delete [] reg_statistic_;
-              //  }
-
-            }
-
-            const int& dim(){return dim_;}
-            void run(const IIterator& begin, const IIterator& end){
-
-                for(int i = 0; i < dim_; ++ i){
+            void run_reg(const IIterator& begin, const IIterator& end){
+                
+                for(int i = 0; i < dim_reg_; ++ i){
                     reg_statistic_[i] = Point2f(0.0f,0.0f);
                     int count = 0 ; 
                     for(IIterator it =begin; it != end; ++ it, ++ count){
@@ -78,24 +59,20 @@ namespace Beta{
                     reg_statistic_[i].x /= float(count) + 1e-6;
                     reg_statistic_[i].y /= float(count) + 1e-6;
                 }
-            }
 
+
+            }
         protected:
             Point2f* reg_statistic_;
-            int dim_;
+            int dim_reg_;
+
+        protected:
+            float* cls_statistic_;
+            int dim_cls_;
+
+            
+
 
     };
-
-
-
 }
-
-
-
-
-
-
-
-
-
 #endif

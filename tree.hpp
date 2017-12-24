@@ -17,6 +17,7 @@
 #include "statistic.hpp"
 #include "serialize.hpp"
 
+
 #include <mutex>
 
 using namespace std;
@@ -61,7 +62,7 @@ class Node{
         int& stype(){return type_;}
         int& sleft(){return left_;}
         int& sright(){return right_;}
-        
+      
         const float N(){return N_;}
         const float W(){return W_;}
         const float Q(){return Q_;}
@@ -82,6 +83,12 @@ class Node{
             LOG(INFO)<<"x0: "<<state_.x0_ <<" y0: "<<state_.y0_<<" x1: "<<state_.x1_<<" y1: "<<state_.y1_<<" xc: "<<state_.xc_<<" yc: "<<state_.yc_<<" t: "<< state_.t_;
         }
 
+
+
+        void init_cls(){
+
+        }
+
     
 
     protected:
@@ -97,12 +104,15 @@ class Node{
         float P_;
         float U_;
         bool flag_; // if flag_ = 1, is leaf node;
-        int type_; // type = 1, regression node; type = 2, classification node; type=-1
+        int type_; // type != 0 leaf node: type = 1, regression node; type = 2, classification node
+                   // type=0 split node
         
         int left_;
         int right_;
 
-        Statistic* statistic_;
+        float* cls_;
+        Point2f* reg_;
+
         //static int index;
 };
 
@@ -119,12 +129,13 @@ class Tree{
             selector_ = shared_ptr<Selector<State> >(new Selector<State>(- context_patch, context_patch));
             dim_features_ = config.configuration_.dim_features();
 
-
+            num_classes_ = config.configuration_.num_classes();
+            num_keypoints_ = config.configuration_.num_keypoints();
 
             reg_eval_ = shared_ptr<Evaluation> (new RegressionEvaluation(config));
             cls_eval_ = shared_ptr<Evaluation> (new ClassificationEvaluation(config));
             minimum_samples_ = config.configuration_.minimum_samples();
-
+            statistic_ = shared_ptr<Statistic>(new Statistic(num_keypoints_,num_classes_));
         }
         ~Tree(){
 
@@ -235,6 +246,7 @@ class Tree{
             Node<State>* node = new Node<State>("Node"+std::to_string(counter_));
             node->sindex() = counter_;
             node->sdepth() = 0;
+            node->stype() = 0;
             add_node(node);
             DLOG(INFO)<<"start training from root";
             train_recurse(data->data_.begin(), data->data_.end(),0);
@@ -246,12 +258,12 @@ class Tree{
 
         void test(Data* data){
 
-            for(IIterator it = data->data_.begin() ; it != data.data_->end(); ++it ){
+            for(IIterator it = data->data_.begin() ; it != data->data_.end(); ++it ){
                 predict(it->img_, it->prediction_, it->confidence_);
             }
             float correct = 0;
             float total_samples = 0;
-            for(IIterator it = data->data_.begin() ; it != data.data_->end(); ++it ){
+            for(IIterator it = data->data_.begin() ; it != data->data_.end(); ++it ){
                 if(it->prediction_ == it->label_){
                     ++ correct;
                 }
@@ -271,6 +283,8 @@ class Tree{
                     node = find(node->right());
                 }
             }
+
+
 
             //label = ;
             
@@ -295,6 +309,17 @@ class Tree{
             }
 
             if(depth >= L_ || number_samples < minimum_samples_){
+                LOG(INFO) << "caculating the statistic for each node";
+                Node<State>* current = find(counter_);
+
+                // regression
+                if( current->type() == 1 ){
+                    statistic_->init_reg();
+                    statistic_->run_reg(begin, end);
+                }else if(current->type() == 2){
+                    statistic_->init_cls();
+                    statistic_->run_cls(begin, end);
+                }
                 LOG(INFO)<<"return with depth: " << depth <<" number_samples: "<< number_samples; 
                 return;
             }
@@ -310,19 +335,17 @@ class Tree{
 
             Node<State>* node  = find(counter_);
 
-
+            float random_variable = random_generator.NextDouble();
+            eval_ = random_variable > 0.5 ? reg_eval_ : cls_eval_;
             for(int i = 0; i < dim_features_; ++ i){
                 for(it = begin; it != end; ++ it){
                     it->key_= feature_->extract(it->img_, selector_->selector(i));
                     //std::cout<< it->key_<<" ";
                 }
 
-                LOG(INFO)<< "sort" << i ;
+                //LOG(INFO)<< "sort" << i ;
 
                 sort(begin,end, compare);
-
-                
-                eval_ = random_generator.NextDouble() > 0.5 ? reg_eval_ : cls_eval_;
                 for(it  = begin; it != end; ++ it){
                     val  = eval_->calculate(begin, it, end);
                     //val = 0;
@@ -330,6 +353,7 @@ class Tree{
                         max_val = val;
                         node->sstate() = selector_->selector(i);
                         node->sstate().t_ = it->key_;
+                        node->stype() = random_variable > 0.5 ? 1 : 2;
                         best = it;
                     }
                 }
@@ -394,7 +418,10 @@ class Tree{
         shared_ptr<Evaluation> cls_eval_;
         shared_ptr<Evaluation> eval_;
 
+        shared_ptr<Statistic> statistic_;
 
+        int num_keypoints_;
+        int num_classes_;
 
 
 
