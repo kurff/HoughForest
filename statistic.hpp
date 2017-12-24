@@ -10,7 +10,7 @@ namespace Beta{
     class Statistic{
         typedef typename vector<Image>::iterator IIterator;
         public:
-            Statistic(int dim_reg, int dim_cls): dim_reg_(dim_reg), dim_cls_(dim_cls){
+            Statistic(): dim_reg_(0), dim_cls_(0){
                 
                 
             }
@@ -21,7 +21,8 @@ namespace Beta{
             const int& dim_reg(){return dim_reg_;}
             const int& dim_cls(){return dim_cls_;}
 
-            void init_cls(){
+            void init_cls(int dim_cls){
+                dim_cls_ = dim_cls;
                 cls_statistic_ = new float [dim_cls_] ();
             }
 
@@ -29,7 +30,8 @@ namespace Beta{
                 delete [] cls_statistic_;
             }
 
-            void init_reg(){
+            void init_reg(int dim_reg){
+                dim_reg_ = dim_reg;
                 reg_statistic_ = new Point2f[dim_reg_]();
             }
             void destroy_reg(){

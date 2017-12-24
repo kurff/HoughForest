@@ -79,8 +79,19 @@ class Data{
                 keypoints.push_back(Point(i*step,0.0f));
                 keypoints.push_back(Point(i*step,height_));
             }
-            
+        }
 
+        void load_init_keypoints(vector<Point2f>& keypoints){
+            keypoints.clear();  
+            int step = height_/(num_keypoints_/4);
+            for(int i = 0; i < num_keypoints_/4; ++ i){
+                keypoints.push_back(Point(0.0f,i*step));
+                keypoints.push_back(Point(width_,i*step));
+            }
+            for(int i = 0; i < num_keypoints_/4; ++i){
+                keypoints.push_back(Point(i*step,0.0f));
+                keypoints.push_back(Point(i*step,height_));
+            }
         }
 
 

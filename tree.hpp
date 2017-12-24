@@ -84,12 +84,17 @@ class Node{
         }
 
 
+  
 
-        void init_cls(){
 
-        }
+
+
 
     
+    public:
+        shared_ptr<Statistic> statistic_;
+        
+
 
     protected:
         map<unsigned long, Node<State> * > child_;
@@ -110,8 +115,7 @@ class Node{
         int left_;
         int right_;
 
-        float* cls_;
-        Point2f* reg_;
+
 
         //static int index;
 };
@@ -135,7 +139,7 @@ class Tree{
             reg_eval_ = shared_ptr<Evaluation> (new RegressionEvaluation(config));
             cls_eval_ = shared_ptr<Evaluation> (new ClassificationEvaluation(config));
             minimum_samples_ = config.configuration_.minimum_samples();
-            statistic_ = shared_ptr<Statistic>(new Statistic(num_keypoints_,num_classes_));
+            
         }
         ~Tree(){
 
@@ -145,12 +149,12 @@ class Tree{
             //leaf_node->
 
             DLOG(INFO)<< "adding "<< counter_<<" node";
-            node->sindex() = ++ counter_;
+            node->sindex() = ++counter_;
             //nodes_[counter_] = node;
             nodes_.insert(std::pair<unsigned long, Node<State>* >(counter_,node));
             leaf_node->insert(std::pair<unsigned long, Node<State>* >(counter_,node));
             node->sparent()=leaf_node;
-
+            //++ counter_;
             LOG(INFO)<<"adding finish";
             
             //tree_.push_back(node);
@@ -164,8 +168,9 @@ class Tree{
                 LOG(INFO)<<" tree already has such node";
                 return false;
             }
-            node->sindex() = ++ counter_;
+            node->sindex() = ++counter_;
             nodes_[counter_] = node;
+            //++ counter_;
             return true;
         }
 
@@ -244,7 +249,7 @@ class Tree{
 
         void train(Data* data){
             Node<State>* node = new Node<State>("Node"+std::to_string(counter_));
-            node->sindex() = counter_;
+            node->sindex() = counter_+1;
             node->sdepth() = 0;
             node->stype() = 0;
             add_node(node);
@@ -273,7 +278,7 @@ class Tree{
         }
 
         void predict(const Mat& image, int & label , float & confidence){
-            Node<State>* node = find(0);
+            Node<State>* node = find(1);
             float v = 0;
             while(node->child().size()){
                 v =  feature_->extract(image, node->state());
@@ -309,16 +314,18 @@ class Tree{
             }
 
             if(depth >= L_ || number_samples < minimum_samples_){
-                LOG(INFO) << "caculating the statistic for each node";
+                LOG(INFO) << "caculating the statistic for node: "<< counter_;
                 Node<State>* current = find(counter_);
 
+                current->statistic_ = shared_ptr<Statistic>(new Statistic());
                 // regression
                 if( current->type() == 1 ){
-                    statistic_->init_reg();
-                    statistic_->run_reg(begin, end);
+                    current->statistic_->init_reg(num_keypoints_);
+                    current->statistic_->run_reg(begin, end);
                 }else if(current->type() == 2){
-                    statistic_->init_cls();
-                    statistic_->run_cls(begin, end);
+
+                    current->statistic_->init_cls(num_classes_);
+                    current->statistic_->run_cls(begin, end);
                 }
                 LOG(INFO)<<"return with depth: " << depth <<" number_samples: "<< number_samples; 
                 return;
@@ -354,18 +361,13 @@ class Tree{
                         node->sstate() = selector_->selector(i);
                         node->sstate().t_ = it->key_;
                         node->stype() = random_variable > 0.5 ? 1 : 2;
+                        
                         best = it;
                     }
                 }
             }
 
             node->print_state();
-
-
-
-
-
-
             Node<State>* node_left = new Node<State>("Node"+std::to_string(counter_+1) );
             LOG(INFO)<< "adding Node "<<std::to_string(counter_+1);
             node->sleft() = counter_+1;
@@ -379,9 +381,6 @@ class Tree{
             node->sright() = counter_+1;
             add_node(node, node_right);
             train_recurse(best, end, depth+1);
-
-
-            
         }
 
 
