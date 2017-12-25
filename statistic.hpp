@@ -61,12 +61,34 @@ namespace Beta{
                     reg_statistic_[i].x /= float(count) + 1e-6;
                     reg_statistic_[i].y /= float(count) + 1e-6;
                 }
-
-
             }
+            // if left == 1; then choose one;
+            void run_reg_single(const IIterator& begin, const IIterator& end, int index, int left){
+                    
+                    Point2f center = Point2f(0.0f,0.0f);
+                    int count = 0 ; 
+                    for(IIterator it =begin; it != end; ++ it, ++ count){
+                       center +=  it->keypoints_[index];
+                    }
+                    center.x /= float(count) + 1e-6;
+                    center.y /= float(count) + 1e-6;
+
+                    if(left == 1){
+                        center_left_ = center;
+                    }else{
+                        center_right_ = center;
+                    }
+            }
+
+            const Point2f& left(){return center_left_;}
+            const Point2f& right(){return center_right_;}
+
+
         protected:
             Point2f* reg_statistic_;
             int dim_reg_;
+            Point2f center_left_;
+            Point2f center_right_;
 
         protected:
             float* cls_statistic_;

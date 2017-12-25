@@ -62,6 +62,7 @@ class Node{
         int& stype(){return type_;}
         int& sleft(){return left_;}
         int& sright(){return right_;}
+        int& sindex_keypoints(){return index_keypoints_;}
       
         const float N(){return N_;}
         const float W(){return W_;}
@@ -114,6 +115,8 @@ class Node{
         
         int left_;
         int right_;
+
+        int index_keypoints_;
 
 
 
@@ -344,6 +347,8 @@ class Tree{
 
             float random_variable = random_generator.NextDouble();
             eval_ = random_variable > 0.5 ? reg_eval_ : cls_eval_;
+            int random_int = random_generator.Next(0,num_keypoints_);
+
             for(int i = 0; i < dim_features_; ++ i){
                 for(it = begin; it != end; ++ it){
                     it->key_= feature_->extract(it->img_, selector_->selector(i));
@@ -354,18 +359,28 @@ class Tree{
 
                 sort(begin,end, compare);
                 for(it  = begin; it != end; ++ it){
-                    val  = eval_->calculate(begin, it, end);
+
+                    val  = eval_->calculate_single(begin, it, end, random_int);
                     //val = 0;
                     if(max_val >= val){
                         max_val = val;
                         node->sstate() = selector_->selector(i);
                         node->sstate().t_ = it->key_;
                         node->stype() = random_variable > 0.5 ? 1 : 2;
-                        
+                        node->sindex_keypoints() = random_int;
                         best = it;
                     }
+
                 }
             }
+
+            if(random_variable > 0.5){
+                node->statistic_->run_reg_single(begin, best, random_int, 1);
+                node->statistic_->run_reg_single(best, end, random_int,0);
+            }
+
+
+
 
             node->print_state();
             Node<State>* node_left = new Node<State>("Node"+std::to_string(counter_+1) );
@@ -373,13 +388,22 @@ class Tree{
             node->sleft() = counter_+1;
             node_left->sdepth() = depth + 1;
             add_node(node, node_left);
+            if(random_variable > 0.5){
+                selector_->set_center(node->statistic_->left().x, node->statistic_->left().y);
+            }
             train_recurse(begin, best, depth+1);
+
+
+
 
             Node<State>* node_right = new Node<State>("Node"+std::to_string(counter_+1));
             LOG(INFO)<< "adding Node "<<std::to_string(counter_+1);
             node_right->sdepth() = depth + 1;
             node->sright() = counter_+1;
             add_node(node, node_right);
+            if(random_variable > 0.5){
+                selector_->set_center(node->statistic_->right().x, node->statistic_->right().y);
+            }
             train_recurse(best, end, depth+1);
         }
 

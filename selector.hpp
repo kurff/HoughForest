@@ -26,11 +26,17 @@ class Selector{
                 selector_[i].y0_ = rand.Next(min_val_, max_val_);
                 selector_[i].x1_ = rand.Next(min_val_, max_val_);
                 selector_[i].y1_ = rand.Next(min_val_, max_val_);
-
             }
-
-
         }
+
+        void set_center(float x, float y){
+            for(auto & se : selector_){
+                se.xc_ = x;
+                se.yc_ = y;
+            }
+        }
+
+
         void print(){
             for(int i = 0; i < selector_.size(); ++ i){
                 cout<< selector_[i].x1_ <<" "<< selector_[i].y1_<<" "<<endl;
